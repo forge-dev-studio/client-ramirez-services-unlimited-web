@@ -1,0 +1,575 @@
+<!doctype html>
+
+<html lang="en-US">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Deck Size and Board Calculator | Ramirez Services Unlimited</title>
+
+<meta name="description" content="A working calculator for deck square footage, board count and joist count, plus the framing spacings that decide how a deck feels underfoot.">
+
+
+
+
+<link rel="canonical" href="https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/guides/what-a-deck-costs-and-how-to-size-one/">
+
+<meta name="robots" content="noindex, nofollow">
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ramirez Services Unlimited LLC">
+<meta property="og:title" content="Deck Size and Board Calculator">
+<meta property="og:description" content="A working calculator for deck square footage, board count and joist count, plus the framing spacings that decide how a deck feels underfoot.">
+<meta property="og:url" content="https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/guides/what-a-deck-costs-and-how-to-size-one/">
+<meta property="og:image" content="https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/assets/img/brand/og-default.png">
+<meta property="og:image:alt" content="The Ramirez Services Unlimited logo: a deck, stair and railing built into the letter R, in charcoal and orange.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+
+
+
+
+<meta name="theme-color" content="#2a3038">
+<meta name="format-detection" content="telephone=yes">
+
+<link rel="icon" href="/client-ramirez-services-unlimited-web/assets/img/brand/favicon/favicon.ico" sizes="32x32">
+<link rel="icon" href="/client-ramirez-services-unlimited-web/assets/img/brand/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/client-ramirez-services-unlimited-web/assets/img/brand/favicon/apple-touch-icon.png">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+
+<link rel="stylesheet" href="/client-ramirez-services-unlimited-web/assets/css/tokens.css">
+<link rel="stylesheet" href="/client-ramirez-services-unlimited-web/assets/css/base.css">
+<link rel="stylesheet" href="/client-ramirez-services-unlimited-web/assets/css/components.css">
+
+
+</head>
+
+<body class="has-sticky-bar">
+
+<a class="skip-link" href="#main">Skip to the main content</a>
+
+
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+
+    <a class="nameplate" href="/client-ramirez-services-unlimited-web/">
+      <img class="nameplate__mark" src="/client-ramirez-services-unlimited-web/assets/img/brand/icon-full-color.svg" alt="" width="93" height="60" aria-hidden="true">
+      <span class="nameplate__text">
+        <span class="nameplate__name">Ramirez <em>Services Unlimited</em></span>
+        <span class="nameplate__where">Adairsville, GA<span class="nameplate__trade"> &middot; Deck &amp; fence contractor</span></span>
+      </span>
+      <span class="visually-hidden">Ramirez Services Unlimited LLC, Adairsville, GA. Home page.</span>
+    </a>
+
+    <a class="header-call" href="tel:+17068798873">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.1 21 3 12.9 3 3c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"></path></svg>
+      <span class="header-call__digits">(706) 879-8873</span>
+      <span class="header-call__word">Call</span>
+      <span class="visually-hidden">Call (706) 879-8873</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="visually-hidden">Menu</span>
+      <svg class="icon-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <rect x="3" y="5" width="18" height="3" fill="currentColor"></rect>
+        <rect x="3" y="11" width="18" height="3" fill="currentColor"></rect>
+        <rect x="3" y="17" width="18" height="3" fill="currentColor"></rect>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M5 6.4 6.4 5l5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6z" fill="currentColor"></path>
+      </svg>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="site-nav__list">
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/services/">Services</a>
+        </li>
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/service-areas/">Service areas</a>
+        </li>
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/guides/">Guides</a>
+        </li>
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/reviews/">Reviews</a>
+        </li>
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/about/">About</a>
+        </li>
+        <li>
+          <a href="/client-ramirez-services-unlimited-web/contact/">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="wrap">
+    <ol>
+      <li><a href="/client-ramirez-services-unlimited-web/">Home</a></li>
+      <li><a href="/client-ramirez-services-unlimited-web/guides/">Guides</a></li>
+      <li><span aria-current="page">Deck size and board calculator</span></li>
+    </ol>
+  </div>
+</nav>
+
+
+
+<main id="main">
+
+
+
+<article class="guide">
+
+  <header class="page-head">
+    <div class="wrap wrap--prose">
+<p class="eyebrow eyebrow--flanked"><span>Decks</span></p>
+
+      <h1>Deck Size and Board Calculator</h1>
+      <span class="stringer stringer--lg" aria-hidden="true"></span><p class="lead">Work out the size first. Once you know the square footage, the board count and how many joists sit under it, every quote you receive becomes readable.</p>
+      <p class="micro-label guide__updated">Updated August 2026</p>
+    </div>
+  </header>
+
+  <div class="section section--tight">
+    <div class="wrap wrap--prose prose">
+      
+<h2>Size it before you price it</h2>
+
+<p>Almost everyone starts with a budget and works backward to a size, which is why so many decks end
+up slightly too small to use properly.</p>
+
+<p>Start with furniture instead. Measure what you own or intend to buy, then add about three feet
+around it for chairs pulling back and people walking past. That is your deck.</p>
+
+<div class="table-scroll" style="overflow-x:auto">
+<table>
+  <thead>
+    <tr><th>Size</th><th>Square feet</th><th>What genuinely fits</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>10 by 12</td><td>120</td><td>A small table for four, or two loungers. Not both</td></tr>
+    <tr><td>12 by 12</td><td>144</td><td>A round table for six with chairs pulled back</td></tr>
+    <tr><td>12 by 16</td><td>192</td><td>Dining for six plus a grill station against the rail</td></tr>
+    <tr><td>14 by 20</td><td>280</td><td>Dining plus a separate seating group. The most common family size</td></tr>
+    <tr><td>16 by 20</td><td>320</td><td>Two defined zones with a clear walking route between them</td></tr>
+    <tr><td>Wraparound</td><td>Varies</td><td>Access to two doors. Costs disproportionately more, because corners are framing</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>The calculator</h2>
+
+<p>Put in the deck you are picturing. It returns square footage, how many boards to buy, and how many
+joists sit under them. Quantities, not prices, because material prices move and a quantity does not.</p>
+
+<div class="callout" id="deckcalc">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem">
+    <div class="field">
+      <label for="dc-w">Width, along the house (feet)</label>
+      <input class="input" type="number" id="dc-w" value="16" min="4" max="60" step="1">
+    </div>
+    <div class="field">
+      <label for="dc-d">Depth, out from the house (feet)</label>
+      <input class="input" type="number" id="dc-d" value="12" min="4" max="40" step="1">
+    </div>
+    <div class="field">
+      <label for="dc-b">Board size</label>
+      <select class="select" id="dc-b">
+        <option value="5.5" selected="">Nominal 2x6, 5.5 inches wide</option>
+        <option value="3.5">Nominal 2x4, 3.5 inches wide</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="dc-s">Joist spacing</label>
+      <select class="select" id="dc-s">
+        <option value="16" selected="">16 inches on center, boards straight across</option>
+        <option value="12">12 inches on center, diagonal boards or composite</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="dc-l">Board lengths you can buy (feet)</label>
+      <select class="select" id="dc-l">
+        <option value="16" selected="">16</option>
+        <option value="12">12</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+  <ul id="dc-out" style="list-style:none;padding-left:0"></ul>
+  <p class="micro-label">A starting point for a rectangular deck, not a material order. Stairs,
+  railings, blocking and the beam are not counted here.</p>
+</div>
+
+<script>
+(function () {
+  var ids = ["dc-w", "dc-d", "dc-b", "dc-s", "dc-l"];
+  var out = document.getElementById("dc-out");
+  if (!out) return;
+  var GAP = 0.25;
+
+  function val(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+  function run() {
+    var w = val("dc-w"), d = val("dc-d"), bw = val("dc-b"), sp = val("dc-s"), len = val("dc-l");
+    if (w <= 0 || d <= 0) { out.innerHTML = ""; return; }
+
+    var area = w * d;
+    var rows = Math.ceil((d * 12) / (bw + GAP));
+    var linear = rows * w;
+    var boards = Math.ceil((linear * 1.1) / len);
+    var joists = Math.floor((w * 12) / sp) + 1;
+    var beams = d > 8 ? 2 : 1;
+    var posts = beams * (Math.ceil(w / 6) + 1);
+
+    var lines = [
+      ["Deck area", area.toLocaleString("en-US") + " square feet"],
+      ["Rows of decking", rows + " rows across the depth"],
+      ["Decking to buy", boards + " boards at " + len + " feet, including 10 percent for cuts and waste"],
+      ["Linear feet of decking", Math.round(linear).toLocaleString("en-US") + " feet before waste"],
+      ["Joists", joists + " at " + sp + " inches on center"],
+      ["Support posts", "about " + posts + ", across " + beams + (beams === 1 ? " beam" : " beams")]
+    ];
+
+    out.innerHTML = lines.map(function (l) {
+      return "<li style=\"display:flex;justify-content:space-between;gap:1rem;padding:0.4rem 0;border-bottom:1px solid rgba(0,0,0,0.08)\">" +
+        "<span>" + l[0] + "</span><b>" + l[1] + "</b></li>";
+    }).join("");
+  }
+
+  ids.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) { el.addEventListener("input", run); el.addEventListener("change", run); }
+  });
+  run();
+})();
+</script>
+
+<h2>Joist spacing, and why a deck feels the way it feels</h2>
+
+<p>This is the part of a deck nobody sees and everybody notices.</p>
+
+<p>Hervin frames joists at sixteen inches on center for boards running straight across, and tightens
+to twelve for boards laid on a diagonal or for most composite. The reason is simple.</p>
+
+<p>A deck board is
+a small bridge between two joists, and shortening that bridge stops the board flexing under a foot.
+A diagonal board crosses the joists at an angle, so its unsupported run is longer than the spacing
+suggests, and composite is more flexible than wood at the same thickness.</p>
+
+<p>The practical consequence is what you feel when you walk out onto it. Two decks built the same
+week from the same boards, one at sixteen and one at twelve, feel like different quality
+construction, and the difference is a handful of extra joists.</p>
+
+<p>When you compare quotes, the spacing is the line that explains a gap in the price that otherwise
+looks like nothing.</p>
+
+<h2>Board gaps, blocking and the beam</h2>
+
+<p><b>Board gaps.</b> The gap between boards exists so water and pine straw fall through and so the
+boards can move. Pressure treated lumber usually arrives wet and shrinks as it dries, so it goes down
+close and opens up on its own.</p>
+
+<p>Kiln dried lumber and composite go down at the gap they will keep,
+because they are not going to shrink much. Get this backward and you either end up with no gaps at
+all or with gaps you could lose a phone through.</p>
+
+<p><b>Blocking.</b> Short pieces set between joists, at the board seams and where the frame needs
+stiffening. Blocking is the cheapest thing on the material list and it is the first thing left out of
+a thin quote. A deck with no blocking feels bouncy at the middle and its board ends move against each
+other.</p>
+
+<p><b>Posts and the beam.</b> Post spacing follows the beam, not the other way around. A heavier beam
+carries further and needs fewer posts.</p>
+
+<p>Whether that saves money depends on lumber prices in the week
+you build, which is why two competent builders can land on different post counts for the same deck
+and both be right.</p>
+
+<h2>What actually drives the price</h2>
+
+<p>Roughly in order of impact on the total.</p>
+
+<ul>
+  <li><b>Square footage.</b> Obvious, and the one everybody already knows.</li>
+  <li><b>Height off the ground.</b> The single most underestimated factor. A deck two feet up and a
+  deck ten feet up are not the same job: taller posts, bigger footings, a railing, bracing,
+  and a long flight of stairs.</li>
+  <li><b>Stairs.</b> A stair flight is framing, treads, risers, a landing and a handrail. It is
+  effectively a small separate structure and it is priced like one.</li>
+  <li><b>Railing choice.</b> The gap between a plain wood rail and a cable or composite system is
+  large, and rails are sold by the running foot, so a long thin deck carries more rail than a square
+  one of the same area.</li>
+  <li><b>Board material.</b> Pressure treated pine, cedar, and the composite range all sit at
+  different levels, and composite spans a wide band on its own.
+  <a href="/client-ramirez-services-unlimited-web/services/composite-decking/">The composite page</a> covers what separates the tiers.</li>
+  <li><b>Demolition.</b> Taking an old deck down and hauling it away is a day of work and a dumpster.</li>
+  <li><b>Access.</b> Whether material can be carried straight to the back of the house or has to go
+  through it.</li>
+  <li><b>Shape.</b> Angles, curves, wraparounds and picture framing all add cuts and framing that a
+  rectangle does not need.</li>
+</ul>
+
+<h2>Why this page carries no dollar figures</h2>
+
+<p>Published deck cost ranges are national averages, and lumber has moved enough in recent years that
+a range written eighteen months ago is fiction today. Quoting one here would be inventing precision.</p>
+
+<p>What is more useful: bring the square footage and the board count from the calculator above to the
+conversation. From those two numbers plus the height and the stair count, a real quote takes minutes
+rather than a site visit and a week. <a href="/client-ramirez-services-unlimited-web/contact/">Ask for one</a>.</p>
+
+<h2>Replacing boards on a frame that is still good</h2>
+
+<p>This is the best value job in decking and it is worth knowing whether you qualify.</p>
+
+<p>Three things have to be sound: the ledger where the deck attaches to the house, the posts and
+beams, and the joists at their ends where they sit on the beam.</p>
+
+<p>If those are solid and only the
+walking surface has gone, the deck can be re-boarded at a fraction of a rebuild, and the new surface
+gets the full life of the material.</p>
+
+<p>If any of the three are not, you are being sold a fresh floor on a deck that is failing
+underneath. <a href="/client-ramirez-services-unlimited-web/services/deck-repair/">Deck repair</a> covers how to tell the difference from
+ground level, and the finish side is in
+<a href="/client-ramirez-services-unlimited-web/guides/clean-stain-and-seal-a-deck/">the cleaning and staining guide</a>.</p>
+
+<h2>Reading a deck quote</h2>
+
+<p>Five lines to ask for. They cost nothing to request and they make two quotes comparable.</p>
+
+<ol>
+  <li>Joist spacing, and whether blocking is included.</li>
+  <li>Footing size and depth, and how many.</li>
+  <li>How the deck attaches to the house, or whether it is freestanding.</li>
+  <li>Railing type and total running feet of it.</li>
+  <li>Stairs: number of flights, and whether a landing is included.</li>
+</ol>
+
+<p>A quote with a square footage and a total and nothing else is not comparable to anything.</p>
+
+<h2>Where he builds</h2>
+
+<p>Hervin works from Adairsville, which is his strongest market, and covers the I-75 corridor and
+northwest Georgia. <a href="/client-ramirez-services-unlimited-web/service-areas/adairsville-ga/">Adairsville</a> and
+<a href="/client-ramirez-services-unlimited-web/service-areas/calhoun-ga/">Calhoun</a> are the two closest, and the housing era in each
+means very different deck conversations: replacement in the older stock, first decks on newer
+builds.</p>
+
+<p>Not one of the twenty seven reviews on his Google profile sits below five stars. If you are still
+deciding between wood and composite, or between a deck and a patio,
+<a href="/client-ramirez-services-unlimited-web/guides/choosing-materials-decking-fencing-patios/">the comparison guide</a> is the next
+page to read. Otherwise <a href="/client-ramirez-services-unlimited-web/contact/">send the numbers over</a>.</p><script type="application/ld+json">{"@context":"https://schema.org","@type":["LocalBusiness","GeneralContractor"],"@id":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/#business","name":"Ramirez Services Unlimited LLC","legalName":"Ramirez Services Unlimited LLC","url":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/","telephone":"+17068798873","email":"ramirezservices87@gmail.com","image":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/assets/img/brand/og-default.png","address":{"@type":"PostalAddress","addressLocality":"Adairsville","addressRegion":"GA","postalCode":"30103","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":34.37106,"longitude":-84.92152},"areaServed":[{"@type":"Place","name":"Northwest Georgia and the north Atlanta metro"}],"knowsLanguage":["English","Spanish"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}],"founder":{"@type":"Person","name":"Hervin Ramirez"},"sameAs":["https://www.facebook.com/hervinram/","https://www.google.com/maps/place/Ramirez+Services+Unlimited+LLC","https://www.instagram.com/ramirezdecking/"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/guides/"},{"@type":"ListItem","position":3,"name":"Deck size and board calculator","item":"https://forge-dev-studio.github.io/client-ramirez-services-unlimited-web/guides/what-a-deck-costs-and-how-to-size-one/"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size deck do I actually need?","acceptedAnswer":{"@type":"Answer","text":"A table for six plus chairs pulled back needs about twelve by twelve on its own. Add a grill zone and a seating group and you are at twelve by twenty. Measure your furniture and add three feet of walking room around it."}},{"@type":"Question","name":"How many deck boards will I need?","acceptedAnswer":{"@type":"Answer","text":"Divide the depth of the deck in inches by the board width plus the gap to get the number of rows, then multiply the rows by the deck width to get linear feet. The calculator on this page does it, and adds waste."}},{"@type":"Question","name":"What joist spacing does Hervin frame to?","acceptedAnswer":{"@type":"Answer","text":"Sixteen inches on center for boards laid straight across, and twelve for boards laid on a diagonal or for most composite. Tighter joists are the difference between a floor that feels solid and one that gives underfoot."}},{"@type":"Question","name":"How much gap should there be between deck boards?","acceptedAnswer":{"@type":"Answer","text":"Enough for water and debris to fall through and for the board to move. Wet pressure treated lumber is laid close because it shrinks as it dries. Dry lumber and composite are laid to the gap they will keep."}},{"@type":"Question","name":"Is replacing the boards on an old deck worth it?","acceptedAnswer":{"@type":"Answer","text":"If the frame, the posts and the ledger are sound, yes, and it is far cheaper than a new deck. If any of those three are not sound, new boards are money spent on a deck with the same problem."}}]}</script>
+    </div>
+  </div>
+
+  
+  <div class="wrap wrap--prose">
+    <div class="callout">
+      <p><b>Want a straight answer for your own yard?</b>
+      Call <a href="tel:+17068798873">(706) 879-8873</a> and talk it through with
+      Hervin Ramirez, or
+      <a href="/client-ramirez-services-unlimited-web/estimate/">send the details over</a> and he will call you back.</p>
+    </div>
+  </div>
+  <section class="section section--tight">
+    <div class="wrap wrap--prose">
+      <div class="section-head">
+        
+<p class="eyebrow eyebrow--flanked"><span>Common questions</span></p>
+
+        <h2>Questions people ask about this</h2>
+      </div>
+      
+
+<div class="faq">
+  <details open="">
+    <summary>What size deck do I actually need?</summary>
+    <div><p>A table for six plus chairs pulled back needs about twelve by twelve on its own. Add a grill zone and a seating group and you are at twelve by twenty. Measure your furniture and add three feet of walking room around it.</p></div>
+  </details>
+  <details>
+    <summary>How many deck boards will I need?</summary>
+    <div><p>Divide the depth of the deck in inches by the board width plus the gap to get the number of rows, then multiply the rows by the deck width to get linear feet. The calculator on this page does it, and adds waste.</p></div>
+  </details>
+  <details>
+    <summary>What joist spacing does Hervin frame to?</summary>
+    <div><p>Sixteen inches on center for boards laid straight across, and twelve for boards laid on a diagonal or for most composite. Tighter joists are the difference between a floor that feels solid and one that gives underfoot.</p></div>
+  </details>
+  <details>
+    <summary>How much gap should there be between deck boards?</summary>
+    <div><p>Enough for water and debris to fall through and for the board to move. Wet pressure treated lumber is laid close because it shrinks as it dries. Dry lumber and composite are laid to the gap they will keep.</p></div>
+  </details>
+  <details>
+    <summary>Is replacing the boards on an old deck worth it?</summary>
+    <div><p>If the frame, the posts and the ledger are sound, yes, and it is far cheaper than a new deck. If any of those three are not sound, new boards are money spent on a deck with the same problem.</p></div>
+  </details>
+</div>
+
+
+    </div>
+  </section>
+
+  
+  <section class="section section--tight section--sunken">
+    <div class="wrap wrap--prose">
+      <div class="baluster-divider" role="presentation"></div>
+      <div class="guide__related">
+        <div>
+          <h2 class="t-h3">The work itself</h2>
+          <ul class="guide__links">
+            <li><a href="/client-ramirez-services-unlimited-web/services/deck-builder/">Deck building</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/services/deck-repair/">Deck repair and replacement</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/services/composite-decking/">Composite and Trex decking</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/services/deck-staining-sealing/">Deck staining and sealing</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/services/deck-railings-stairs/">Deck railings, stairs and under-deck</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/services/patios-walkways-steps/">Patios, walkways and steps</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="t-h3">Where he works</h2>
+          <ul class="guide__links">
+            <li><a href="/client-ramirez-services-unlimited-web/service-areas/adairsville-ga/">Adairsville</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/service-areas/calhoun-ga/">Calhoun</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="t-h3">Read next</h2>
+          <ul class="guide__links">
+            <li><a href="/client-ramirez-services-unlimited-web/guides/clean-stain-and-seal-a-deck/">How to clean, stain and seal a deck</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</article>
+
+
+<section class="band-dark cta-band">
+  <div class="wrap">
+    <div class="cta-band__inner">
+      <div>
+        <h2>Now get the number for your deck</h2><p class="cta-band__body">Bring the square footage from the calculator and Hervin can talk about real figures on a real site rather than a national average.</p>
+        
+
+
+      </div>
+      <div class="btn-row">
+        
+
+<a class="btn btn--hero btn--block" href="tel:+17068798873"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.1 21 3 12.9 3 3c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"></path></svg><span>Call (706) 879-8873</span>
+</a>
+
+
+        
+
+<a class="btn btn--ghost btn--block" href="/client-ramirez-services-unlimited-web/estimate/"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16v2H4V3zm0 5h16v2H4V8zm0 5h10v2H4v-2zm0 5h10v2H4v-2zm12.5-1.9 4.6-4.6 1.4 1.4-4.6 4.6H16.5v-1.4z"></path></svg><span>Get a free estimate</span>
+</a>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+
+
+<footer class="site-footer">
+  <div class="wrap">
+
+    <div class="site-footer__top">
+      <div>
+        <div class="site-footer__lockup">
+          <img src="/client-ramirez-services-unlimited-web/assets/img/brand/logo-white.svg" alt="Ramirez Services Unlimited LLC" width="295" height="304" loading="lazy" decoding="async">
+        </div>
+
+        <address class="site-footer__nap">
+          <b>Ramirez Services Unlimited LLC</b>
+          Adairsville, GA<br>Serving Northwest Georgia and the north Atlanta metro<br>Open 24 hours
+          <a class="site-footer__phone" href="tel:+17068798873">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.1 21 3 12.9 3 3c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"></path></svg>(706) 879-8873
+          </a>
+        </address>
+        <p class="site-footer__nap">English and Spanish spoken.</p>
+      </div>
+
+      <div class="site-footer__cols">
+        <section>
+          <h2>Services</h2>
+          <ul>
+            <li><a href="/client-ramirez-services-unlimited-web/services/">All services</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>Where we work</h2>
+          <ul>
+            <li><a href="/client-ramirez-services-unlimited-web/service-areas/">Service areas</a></li>
+          </ul>
+        </section>
+        <section>
+          <h2>More</h2>
+          <ul>
+            <li><a href="/client-ramirez-services-unlimited-web/guides/">Guides</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/reviews/">Reviews</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/about/">About</a></li>
+            <li><a href="/client-ramirez-services-unlimited-web/contact/">Contact</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Find us</h2>
+          
+          <ul>
+            <li><a href="https://www.google.com/maps/place/Ramirez+Services+Unlimited+LLC" rel="noopener">Reviews on Google</a></li>
+            <li><a href="https://www.facebook.com/hervinram/" rel="noopener">Facebook</a></li>
+            <li><a href="https://www.instagram.com/ramirezdecking/" rel="noopener">Instagram</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; 2026 Ramirez Services Unlimited LLC. Adairsville, GA.</p>
+      <p><a href="/client-ramirez-services-unlimited-web/privacy/">Privacy</a></p>
+    </div>
+
+  </div>
+</footer>
+
+
+
+<div class="sticky-bar" data-sticky-bar="">
+  <a href="/client-ramirez-services-unlimited-web/estimate/">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16v2H4V3zm0 5h16v2H4V8zm0 5h10v2H4v-2zm0 5h10v2H4v-2zm12.5-1.9 4.6-4.6 1.4 1.4-4.6 4.6H16.5v-1.4z"></path></svg>
+    <span>Estimate</span>
+  </a>
+  <a href="tel:+17068798873">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.1 21 3 12.9 3 3c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.3 0 .7-.2 1l-2.3 2.1z"></path></svg>
+    <span>Call</span>
+    <span class="visually-hidden">(706) 879-8873</span>
+  </a>
+</div>
+
+
+<script src="/client-ramirez-services-unlimited-web/assets/js/ui.js" defer=""></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+/* ============================================================================
+   RAMIREZ SERVICES UNLIMITED LLC
+   Design tokens, derived from the approved logo on 2026-08-26.
+
+   #2a3038, #e45d11 and #fefefc are measured off the artwork and appear here
+   untouched as exact ramp steps. Every other value is derived from them.
+   Contrast ratios in the comments were computed with the WCAG 2.x relative
+   luminance formula. None of them is an estimate.
+
+   Source of truth: docs/research/brand-system-2026-08-26.md
+   Do not recolor #2a3038 or #e45d11. Do not add gradients, strokes or shadows
+   to brand shapes. Do not mirror the 40 degree diagonal.
+   ============================================================================ */
+
+:root {
+  /* --- Charcoal ramp (cool, hue ~211-215). Ink and dark grounds. ---------- */
+  --char-950: #0f1317;
+  --char-900: #191e24;
+  --char-850: #22272d;
+  --char-800: #2a3038;   /* BRAND CHARCOAL. Exact. Do not alter. */
+  --char-700: #3a414b;
+  --char-600: #4c5661;
+  --char-500: #66727f;
+  --char-400: #89939f;
+  --char-300: #afb7c0;
+  --char-200: #d3d9de;
+  --char-100: #e8ecef;
+
+  /* --- Orange ramp (hue 14-27). Accent. ---------------------------------- */
+  --orange-50:  #fef4ec;
+  --orange-100: #fce2cf;
+  --orange-200: #f9c39f;
+  --orange-300: #f49a62;
+  --orange-400: #f07a33;
+  --orange-500: #e45d11;  /* BRAND ORANGE. Exact. Do not alter. */
+  --orange-600: #c54a0d;
+  --orange-700: #a53709;
+  --orange-800: #832807;
+  --orange-900: #601b06;
+
+  /* --- Stone ramp (warm, hue 32-60). Grounds, surfaces, hairlines. -------- */
+  --stone-50:  #fefefc;   /* BRAND BONE. Exact. Measured background. */
+  --stone-100: #f9f8f6;
+  --stone-200: #f2f0ed;
+  --stone-300: #e7e4df;
+  --stone-400: #d2cdc6;
+  --stone-500: #aca49a;
+
+  /* --- Semantic surfaces ------------------------------------------------- */
+  --bg:              var(--stone-50);
+  --bg-sunken:       var(--stone-200);
+  --surface:         #ffffff;
+  --surface-sunken:  var(--stone-100);
+  --surface-inverse: var(--char-900);
+
+  --border:          var(--stone-300);   /* decorative hairline only, 1.26:1 */
+  --border-strong:   var(--stone-400);   /* card outline, 1.57:1, decorative */
+  --border-control:  var(--char-400);    /* inputs. 3.09:1 on bone, meets 1.4.11 */
+  --border-control-sunken: var(--char-500); /* 4.40:1. Use on --bg-sunken. */
+
+  /* --- Semantic ink ------------------------------------------------------ */
+  --text:            var(--char-800);    /* 13.18:1 on --bg */
+  --text-secondary:  var(--char-700);    /* 10.21:1 */
+  --text-muted:      var(--char-600);    /*  7.40:1 */
+  --text-subtle:     var(--char-500);    /*  4.86:1, the smallest permitted */
+  --text-disabled:   var(--char-400);    /*  3.09:1, non-text UI only */
+  --text-inverse:    var(--stone-50);
+
+  /* --- Accent.  #e45d11 is a FIELD color, not a text color. -------------- */
+  --accent:          var(--orange-500);  /* bars, pills, diagonals, icons */
+  --accent-ink:      var(--orange-700);  /* orange TEXT on light. 6.60:1 */
+  --accent-solid:    var(--orange-600);  /* button fill under white. 4.82:1 */
+  --accent-hover:    var(--orange-700);
+  --accent-pressed:  var(--orange-800);
+  --accent-wash:     var(--orange-50);
+  --accent-wash-2:   var(--orange-100);
+  --on-accent:       #ffffff;
+
+  /* --- Focus. One ring works on every ground in the system. -------------- */
+  --focus-ring:        var(--orange-500); /* 3.54 bone, 3.58 white, 3.72 charcoal */
+  --focus-ring-width:  3px;
+  --focus-ring-offset: 2px;
+
+  /* --- Dark band. Footer, quote CTA, proof strip. ------------------------ */
+  --dark-bg:         var(--char-900);    /* #191e24, NOT the logo charcoal */
+  --dark-surface:    var(--char-800);
+  --dark-border:     var(--char-500);    /* 3.42:1 on --dark-bg */
+  --dark-text:       var(--stone-200);   /* 14.86:1 */
+  --dark-text-muted: var(--char-300);    /*  8.27:1 */
+  --dark-accent:     var(--orange-500);  /*  4.69:1. The only ground where the
+                                            untouched brand orange is legal as
+                                            normal-size text. */
+
+  /* --- Geometry, all measured off png/logo-4000w.png --------------------- */
+  --angle-stringer:   40deg;  /* 39.94 leading edge, 42.03 trailing */
+  --tan-stringer:     0.839;  /* rise over run at 40deg */
+  --radius-control:   4px;    /* r/h = 0.027 from the deck boards */
+  --radius-card:      5px;
+  --radius-pill:      999px;  /* r/h = 0.488 from the phone bar */
+  --board-gap-ratio:  0.35;   /* gap = 0.35 x item height. Measured .373/.350 */
+  --gap-board:        22px;   /* 0.35 of a 64px row */
+  --baluster-bar:     6px;    /* bar : gap measured 1 : 0.95, held here */
+  --baluster-gap:     6px;
+  --baluster-post:    15px;   /* posts measured 2.4x to 2.9x a baluster */
+  --stringer-bar:     10px;
+  --stringer-keyline: 5px;
+  --cut-run:          140px;  /* corner cut: run x --tan-stringer = rise */
+  --cut-rise:         117px;
+
+  /* Ink budget measured off the artwork: orange 11.1%, charcoal 25.3%.
+     Hold the page near 1 part orange to 2.3 parts charcoal. If a screenshot
+     shows more orange than charcoal, it is wrong. */
+
+  /* --- Type ------------------------------------------------------------- */
+  --font-display: "Archivo", "Archivo Black", system-ui, -apple-system,
+                  "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    "Archivo", system-ui, -apple-system, "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, sans-serif;
+
+  /* Archivo is variable: wght 100-900, wdth 62-125.
+     900 at width 62 renders 4.94 ink-width per cap-height. The wordmark
+     measures 4.98. That is the display voice and it is why the family
+     was chosen rather than guessed at. */
+  --display-variation: "wght" 900, "wdth" 62;
+  --h2-variation:      "wght" 800, "wdth" 78;
+  --h3-variation:      "wght" 800, "wdth" 88;
+  --eyebrow-variation: "wght" 700, "wdth" 85;
+  --label-variation:   "wght" 600, "wdth" 95;
+  --body-variation:    "wght" 400, "wdth" 100;
+  --body-strong-variation: "wght" 600, "wdth" 100;
+  --btn-variation:     "wght" 700, "wdth" 90;
+
+  --track-display: -0.015em;  /* gaps measured 0.04 to 0.095 cap-heights */
+  --track-h2:      -0.01em;
+  --track-eyebrow:  0.16em;   /* measured 0.23 to 0.39 cap-heights */
+  --track-micro:    0.28em;   /* measured 0.39 to 1.06 cap-heights */
+
+  /* Fluid scale. Mobile first: these clamp up, they never clamp down. */
+  --size-display: clamp(2.25rem, 1.5rem + 3.8vw, 4.25rem);
+  --size-h1:      clamp(2.125rem, 1.5rem + 3.1vw, 3.5rem);
+  --size-h2:      clamp(1.625rem, 1.28rem + 1.7vw, 2.5rem);
+  --size-h3:      clamp(1.1875rem, 1.09rem + 0.5vw, 1.4375rem);
+  --size-lead:    clamp(1.0625rem, 1.01rem + 0.28vw, 1.25rem);
+  --size-body:    1.0625rem;
+  --size-small:   0.9375rem;
+  --size-micro:   0.75rem;
+
+  --leading-display: 0.95;
+  --leading-heading: 1.1;
+  --leading-body:    1.6;
+
+  /* --- Space. 4px base. -------------------------------------------------- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+
+  --section-y: clamp(3rem, 2rem + 4.5vw, 5.5rem);
+  --gutter:    clamp(1.125rem, 0.7rem + 2vw, 2rem);
+
+  /* --- Measure and containers ------------------------------------------- */
+  --measure:      64ch;
+  --width-prose:  46rem;
+  --width-page:   75rem;
+  --width-wide:   86rem;
+
+  /* --- Photo scrims. Computed against real category backdrops.
+         White vinyl fence is the worst case: 0.62 alpha is the floor at
+         4.53:1, so the flat token sits at 0.65 for margin. --------------- */
+  --scrim-flat:     rgba(42, 48, 56, 0.65);
+  --scrim-gradient: linear-gradient(to top,
+                      rgba(42, 48, 56, 0.88) 0%,
+                      rgba(42, 48, 56, 0.72) 34%,
+                      rgba(42, 48, 56, 0.30) 62%,
+                      rgba(42, 48, 56, 0.00) 84%);
+
+  /* --- Touch and chrome -------------------------------------------------- */
+  --tap-min:      44px;   /* WCAG 2.5.5 floor */
+  --tap-comfort:  48px;
+  --bar-height:   60px;   /* sticky mobile bar, above the 56px minimum */
+  --header-height: 68px;
+
+  --z-header:  40;
+  --z-bar:     50;
+  --z-skip:    60;
+
+  --speed-fast: 120ms;
+  --speed:      200ms;
+  --ease:       cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+/* The dark band is a section treatment, not a whole-site theme. There is no
+   white-plus-orange lockup in the delivered asset set, so every dark section
+   costs the orange in the mark. Keep dark to 15-20% of page height. */
+.band-dark {
+  background: var(--dark-bg);
+  --bg: var(--dark-bg);
+  --bg-sunken: var(--char-850);
+  --surface: var(--dark-surface);
+  --surface-sunken: var(--char-850);
+  --border: var(--dark-border);
+  --border-strong: var(--char-600);
+  --border-control: var(--char-400);
+  --border-control-sunken: var(--char-400);
+  --text: var(--dark-text);
+  --text-secondary: var(--stone-300);
+  --text-muted: var(--dark-text-muted);
+  --text-subtle: var(--char-300);
+  --text-inverse: var(--char-900);
+  --accent-ink: var(--dark-accent);
+  color: var(--text);
+}

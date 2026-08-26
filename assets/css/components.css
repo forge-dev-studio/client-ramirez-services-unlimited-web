@@ -1,0 +1,1414 @@
+/* ============================================================================
+   Components. Depends on tokens.css and base.css.
+   Every surface here is squared off: 5px on cards, 4px on controls, and a
+   full stadium on the primary call to action only.
+   ============================================================================ */
+
+/* ============================================================================
+   BUTTONS
+   The phone pill in the lockup measures 5.55:1 wide by tall with a fitted
+   radius of 0.488 of its height. Solid fill, no border, no shadow, no
+   gradient, and wide horizontal padding. Icons lead, never trail.
+   ============================================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  min-height: var(--tap-comfort);
+  padding: 0.875rem 2.25rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--btn-variation);
+  font-size: 1rem;
+  line-height: 1.15;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--speed) var(--ease),
+              color var(--speed) var(--ease);
+}
+
+.btn svg { flex: none; width: 1.15em; height: 1.15em; fill: currentColor; }
+
+/* Default primary. White on #c54a0d is 4.82:1, which passes AA at any size. */
+.btn--primary {
+  background: var(--accent-solid);
+  color: var(--on-accent);
+}
+.btn--primary:hover  { background: var(--accent-hover); }
+.btn--primary:active { background: var(--accent-pressed); }
+
+/* Full strength brand orange is 3.58:1 under white. It is licensed only when
+   the label is at least 24px regular or 18.66px bold, so this variant pins
+   both the size and a real font-weight rather than relying on a variation
+   axis that automated checkers cannot read. */
+.btn--hero {
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 88;
+  padding: 1.0625rem 2.5rem;
+  min-height: 60px;
+}
+.btn--hero:hover  { background: var(--accent-hover); }
+.btn--hero:active { background: var(--accent-pressed); }
+
+.btn--dark {
+  background: var(--char-800);
+  color: var(--stone-50);
+}
+.btn--dark:hover { background: var(--char-900); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  box-shadow: inset 0 0 0 2px var(--char-800);
+}
+.btn--ghost:hover { background: var(--char-800); color: var(--stone-50); }
+
+.band-dark .btn--ghost {
+  color: var(--stone-50);
+  box-shadow: inset 0 0 0 2px var(--stone-200);
+}
+.band-dark .btn--ghost:hover { background: var(--stone-50); color: var(--char-900); }
+
+/* On a photograph the pill is opaque, so the ratio is fixed regardless of the
+   image beneath. A small label over an image uses the darker fill. */
+.btn--on-photo { background: var(--accent-solid); color: var(--on-accent); }
+
+.btn--block { display: flex; width: 100%; }
+
+.btn--sm {
+  min-height: var(--tap-min);
+  padding: 0.625rem 1.5rem;
+  font-size: 0.9375rem;
+}
+
+/* A text link that still reads as an action. Used inline on service cards. */
+.link-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--tap-min);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  color: var(--accent-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  align-self: flex-start;
+}
+.link-cta:hover { color: var(--orange-800); }
+
+.btn-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+/* Right thumb bias: two thirds of one-handed use is the right thumb, so the
+   action we most want tapped sits on the right once they sit side by side. */
+@media (min-width: 480px) {
+  .btn-row { flex-direction: row; flex-wrap: wrap; }
+  .btn-row > .btn { flex: 1 1 auto; }
+}
+
+/* ============================================================================
+   HEADER
+   Three Ramirez contractors compete in this footprint, one of them a fence
+   company in Dalton. The header has to say which Ramirez this is before the
+   visitor decides they are on the wrong site, so the locality and the phone
+   number are part of the identity block, not an afterthought.
+
+   The delivered lockup is a near square (2945 x 3038) and is unreadable in a
+   header bar, so the header carries the square icon master plus the business
+   name set as HTML. The full lockup runs at real size in the footer. Nothing
+   in brand/ is altered or re-cut.
+   ============================================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--stone-50);
+  border-bottom: 2px solid var(--char-800);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: var(--header-height);
+  padding-block: var(--sp-2);
+}
+
+.nameplate {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+  text-decoration: none;
+  color: var(--text);
+  margin-right: auto;
+  padding-block: var(--sp-1);
+}
+.nameplate__mark { width: auto; height: 40px; flex: none; }
+.nameplate__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nameplate__name {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 70;
+  font-size: clamp(0.8125rem, 3.2vw, 1.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.nameplate__name em {
+  font-style: normal;
+  color: var(--accent-ink);
+}
+.nameplate__trade { display: none; }
+@media (min-width: 560px) and (max-width: 1119px) { .nameplate__trade { display: inline; } }
+@media (min-width: 1280px) { .nameplate__trade { display: inline; } }
+
+.nameplate__where {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 88;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+@media (min-width: 440px) { .nameplate__mark { height: 46px; } }
+@media (min-width: 900px) {
+  .nameplate__mark { height: 54px; }
+  .nameplate__where { font-size: 0.6875rem; letter-spacing: 0.14em; }
+}
+
+.header-call {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: none;
+  min-height: var(--tap-min);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent-solid);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 90;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.header-call:hover { background: var(--accent-hover); }
+.header-call svg { width: 1.05em; height: 1.05em; fill: currentColor; }
+.header-call .header-call__digits { display: none; }
+@media (min-width: 560px) {
+  .header-call .header-call__digits { display: inline; }
+  .header-call .header-call__word { display: none; }
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: var(--radius-control);
+  background: var(--stone-200);
+  color: var(--text);
+  cursor: pointer;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+.nav-toggle[aria-expanded="true"] .icon-open  { display: none; }
+
+.site-nav {
+  display: none;
+  flex: 1 0 100%;
+  border-top: 2px solid var(--stone-300);
+  padding-block: var(--sp-3) var(--sp-5);
+}
+.site-nav.is-open { display: block; }
+
+.site-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.site-nav__list a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-comfort);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+}
+.site-nav__list a:hover { background: var(--stone-200); }
+
+/* The newel posts in the mark step out at the top. That is the whole
+   justification for a 4px orange cap on the current page, and it is the only
+   place it is used. */
+.site-nav__list a[aria-current="page"] {
+  background: var(--stone-200);
+  box-shadow: inset 0 4px 0 0 var(--accent);
+}
+
+@media (min-width: 1120px) {
+  .nav-toggle { display: none; }
+  /* Nameplate first, navigation next, phone last on the right where the
+     pointer expects the primary action to sit. */
+  .site-nav {
+    display: block;
+    flex: 0 1 auto;
+    border-top: 0;
+    padding: 0;
+    margin-left: auto;
+    margin-right: var(--sp-2);
+  }
+  .nameplate { margin-right: var(--sp-6); order: 1; }
+  .site-nav { order: 2; }
+  .header-call { order: 3; font-size: 1rem; padding: 0.6rem 1.15rem; }
+  .site-nav__list { flex-direction: row; gap: 0; }
+  .site-nav__list a {
+    min-height: var(--tap-min);
+    font-size: 0.9375rem;
+    padding-inline: var(--sp-2);
+    white-space: nowrap;
+  }
+}
+
+/* ============================================================================
+   HERO
+   One photograph, never a slider. Identity, the distribution claim, and two
+   thumb-height actions with the call visually dominant.
+   ============================================================================ */
+
+/* On a phone the photograph is the hero and the words sit on it, low, in the
+   thumb zone. That is why the scrim is a gradient rather than a flat wash:
+   the top of the image stays clean and the bottom carries 0.88 alpha, which
+   holds up over a white vinyl fence, the worst realistic backdrop in this
+   category and also one of the service lines. */
+.hero {
+  position: relative;
+  background: var(--char-900);
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--char-850);
+}
+.hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-gradient);
+}
+
+.hero__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: min(78vh, 34rem);
+  padding-block: var(--sp-16) var(--sp-8);
+  color: var(--stone-50);
+}
+.hero__body .eyebrow { color: var(--orange-400); }
+.hero h1 { color: var(--stone-50); }
+.hero__claim {
+  font-size: var(--size-lead);
+  color: var(--stone-200);
+  max-width: 34rem;
+  margin-top: var(--sp-4);
+}
+.hero__actions { margin-top: var(--sp-6); }
+.hero__owner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+.hero__owner img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-card);
+  object-fit: cover;
+  flex: none;
+}
+.hero__owner-text {
+  font-size: var(--size-small);
+  color: var(--stone-200);
+  line-height: 1.4;
+}
+.hero__owner-text b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 90;
+  color: var(--stone-50);
+}
+
+/* Desktop: the photograph takes the right of the viewport, full bleed, and
+   its inner corner is cut at 40 degrees on the same hand as the stringer so
+   the diagonal separates the picture from the argument. */
+@media (min-width: 900px) {
+  .hero__media {
+    inset: 0 0 0 52%;
+    --cut-run: 210px;
+    --cut-rise: 176px;
+    clip-path: polygon(
+      0 0, 100% 0, 100% 100%, var(--cut-run) 100%, 0 calc(100% - var(--cut-rise))
+    );
+  }
+  .hero__media::after { background: var(--scrim-flat); opacity: 0.25; }
+  .hero__body {
+    justify-content: center;
+    min-height: 33rem;
+    max-width: 33rem;
+    padding-block: var(--sp-16);
+  }
+}
+@media (min-width: 1200px) {
+  .hero__body { max-width: 36rem; min-height: 36rem; }
+}
+
+/* ============================================================================
+   PHOTOGRAPHS
+   Corner radius matches the deck boards at 5px, never a soft 16px.
+   ============================================================================ */
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--stone-300);
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo--16x9 { aspect-ratio: 16 / 9; }
+.photo--3x2  { aspect-ratio: 3 / 2; }
+.photo--4x3  { aspect-ratio: 4 / 3; }
+.photo--1x1  { aspect-ratio: 1 / 1; }
+
+/* Honest empty state. Nothing here pretends to be a photograph of a job. */
+.photo--pending {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(180deg,
+      var(--stone-300) 0 14px,
+      var(--stone-200) 14px 18px);
+  color: var(--text-muted);
+}
+.photo--pending span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  background: var(--stone-50);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control);
+}
+
+.photo__caption {
+  margin-top: var(--sp-3);
+  font-size: var(--size-small);
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.photo__caption b {
+  color: var(--text);
+  font-variation-settings: var(--body-strong-variation);
+}
+
+/* Before and after as a paired unit, both halves always visible. No drag
+   handle: it costs a tap and hides half the evidence at any moment. */
+.ba-pair { display: grid; gap: var(--sp-3); }
+@media (min-width: 640px) { .ba-pair { grid-template-columns: 1fr 1fr; } }
+.ba-pair figure { margin: 0; position: relative; }
+.ba-pair figcaption {
+  position: absolute;
+  top: var(--sp-3);
+  left: var(--sp-3);
+  background: var(--char-900);
+  color: var(--stone-50);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: 0.6875rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+}
+
+/* ============================================================================
+   SERVICE GRID
+   Each card opens on a real photograph of that service and ends with its own
+   inline call to action.
+   ============================================================================ */
+
+.service-grid { display: grid; gap: var(--gap-board); }
+@media (min-width: 640px)  { .service-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .service-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.service-card__media { aspect-ratio: 4 / 3; background: var(--stone-300); }
+.service-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.service-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  flex: 1;
+}
+.service-card__body p {
+  color: var(--text-secondary);
+  font-size: var(--size-small);
+  margin-bottom: auto;
+}
+.service-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.service-card h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.service-card { position: relative; }
+/* The inline action sits above the card-wide link so it stays separately
+   tappable, which matters because it is a phone call. */
+.service-card .link-cta,
+.service-card .btn { position: relative; z-index: 1; }
+
+/* ============================================================================
+   PROJECT CARD
+   The single highest leverage idea in the research: a review quote sitting
+   beside the photograph of that exact job, with the customer's first name and
+   town. No competitor in the measured set does this. A quote floating in a
+   testimonial band is decoration. The same quote next to the deck it describes
+   is evidence.
+   ============================================================================ */
+
+.project-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.project-card__media { aspect-ratio: 3 / 2; background: var(--stone-300); }
+.project-card__media img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-card__body {
+  padding: var(--sp-5) var(--sp-5) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.project-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 88;
+  font-size: 0.6875rem;
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.project-card__meta > span { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.project-card__meta > span::before {
+  content: "";
+  width: 8px;
+  height: 3px;
+  background: var(--accent);
+}
+
+.project-card blockquote {
+  margin: 0;
+  font-size: var(--size-lead);
+  line-height: 1.45;
+  color: var(--text);
+  font-variation-settings: "wght" 500, "wdth" 100;
+}
+.project-card blockquote p { margin: 0; }
+.project-card blockquote p::before { content: "\201C"; }
+.project-card blockquote p::after  { content: "\201D"; }
+
+.project-card__attrib {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: var(--size-small);
+  color: var(--text-muted);
+}
+.project-card__attrib b {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 92;
+}
+
+/* Desktop: photograph and quote side by side so the pairing is unmissable. */
+.project-card--wide { display: grid; }
+@media (min-width: 820px) {
+  .project-card--wide { grid-template-columns: 1.15fr 1fr; }
+  .project-card--wide .project-card__media { aspect-ratio: auto; height: 100%; }
+  .project-card--wide .project-card__body {
+    padding: var(--sp-8);
+    justify-content: center;
+  }
+}
+
+.project-grid { display: grid; gap: var(--gap-board); }
+@media (min-width: 700px) { .project-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ============================================================================
+   REVIEW CARD
+   Verbatim only. Review text is never edited or paraphrased, and there is no
+   aggregateRating markup anywhere on this site.
+   ============================================================================ */
+
+.review-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: var(--sp-5);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.band-dark .review-card {
+  background: var(--dark-surface);
+  box-shadow: inset 0 0 0 1px var(--char-700);
+}
+
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  color: var(--accent);
+}
+.band-dark .stars { color: var(--orange-400); }
+.stars svg { width: 16px; height: 16px; fill: currentColor; }
+
+.review-card blockquote {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.55;
+}
+.review-card blockquote p { margin: 0; }
+.review-card blockquote p::before { content: "\201C"; }
+.review-card blockquote p::after  { content: "\201D"; }
+
+.review-card__attrib {
+  margin-top: auto;
+  font-size: var(--size-small);
+  color: var(--text-muted);
+}
+.review-card__attrib b {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 92;
+}
+
+.review-grid { display: grid; gap: var(--gap-board); }
+@media (min-width: 700px)  { .review-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* The distribution claim. Consistency across a whole customer base is the
+   claim a homeowner actually wants answered, and unlike an average it is not
+   the median condition in this vertical. */
+.distribution-claim {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  background: var(--accent-wash);
+  border-radius: var(--radius-card);
+  box-shadow: inset 0 0 0 1px var(--orange-200);
+}
+.band-dark .distribution-claim {
+  background: var(--char-850);
+  box-shadow: inset 0 0 0 1px var(--char-700);
+}
+.distribution-claim__count {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: var(--display-variation);
+  font-size: clamp(2.5rem, 8vw, 3.5rem);
+  line-height: 0.85;
+  color: var(--accent-ink);
+  flex: none;
+}
+.band-dark .distribution-claim__count { color: var(--dark-accent); }
+.distribution-claim p { color: var(--text-secondary); }
+.distribution-claim b { color: var(--text); }
+
+/* ============================================================================
+   TRUST BLOCK
+   Every device here is built from something a stranger can verify without
+   taking our word for it. No license, insurance or tenure claim exists in
+   this component, in any state, including its empty state.
+   ============================================================================ */
+
+.trust-block { display: grid; gap: var(--gap-board); }
+@media (min-width: 700px)  { .trust-block { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .trust-block { grid-template-columns: repeat(4, 1fr); } }
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-5);
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.band-dark .trust-item { background: var(--dark-surface); }
+
+.trust-item__icon {
+  width: 34px;
+  height: 34px;
+  color: var(--accent);
+  margin-bottom: var(--sp-1);
+}
+.band-dark .trust-item__icon { color: var(--orange-400); }
+.trust-item__icon svg { width: 100%; height: 100%; fill: currentColor; }
+
+.trust-item h3 { font-size: 1.0625rem; }
+.trust-item p { color: var(--text-muted); font-size: var(--size-small); }
+
+/* The response commitment. Nine of ten competitors promise nothing at all,
+   which makes this the largest unclaimed position in the set. The wording is
+   supplied by data and never by a template, so the page can only ever say
+   what the owner has agreed to honor. */
+.response-promise {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--char-900);
+  color: var(--stone-200);
+  border-radius: var(--radius-card);
+}
+.response-promise__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  /* --orange-500 is 4.69:1 on #191e24 but 4.21:1 on the #22272d ground this
+     label sits on inside the CTA band. --orange-400 clears both. */
+  color: var(--orange-400);
+  flex: none;
+}
+.response-promise p {
+  font-size: var(--size-lead);
+  color: var(--stone-50);
+  margin: 0;
+}
+
+/* ============================================================================
+   BREADCRUMBS
+   ============================================================================ */
+
+.breadcrumbs { padding-block: var(--sp-4); font-size: var(--size-small); }
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumbs li { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.breadcrumbs li + li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid var(--char-400);
+  border-top: 2px solid var(--char-400);
+  transform: rotate(45deg);
+}
+.breadcrumbs a,
+.breadcrumbs [aria-current="page"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+}
+.breadcrumbs a { color: var(--text-muted); text-decoration: none; }
+.breadcrumbs a:hover { color: var(--accent-ink); text-decoration: underline; }
+.breadcrumbs [aria-current="page"] { color: var(--text); }
+
+/* ============================================================================
+   TOWNS
+   An honest list with a stated limit. Saying where he does not go is the most
+   credible thing a service area business can put on a page.
+   ============================================================================ */
+
+.town-list {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+}
+.town-list a,
+.town-list span {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: var(--tap-min);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface);
+  border-radius: var(--radius-control);
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--size-small);
+}
+.town-list a::before,
+.town-list span::before {
+  content: "";
+  width: 10px;
+  height: 3px;
+  background: var(--accent);
+  flex: none;
+}
+.town-list a:hover { background: var(--accent-wash); }
+
+/* ============================================================================
+   FAQ. Gapped boards, never divider ruled rows.
+   ============================================================================ */
+
+.faq { display: flex; flex-direction: column; gap: var(--sp-3); }
+.faq details {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: var(--tap-comfort);
+  padding: var(--sp-4) var(--sp-5);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 3px;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 transparent;
+  position: relative;
+}
+.faq summary::before {
+  content: "";
+  flex: none;
+  order: 2;
+  width: 3px;
+  height: 14px;
+  background: var(--accent);
+  margin-left: -8.5px;
+  transition: opacity var(--speed) var(--ease);
+}
+.faq details[open] summary::before { opacity: 0; }
+.faq details > div { padding: 0 var(--sp-5) var(--sp-5); }
+.faq details > div p { color: var(--text-secondary); }
+
+/* ============================================================================
+   CALLOUT / QUOTE BAND
+   ============================================================================ */
+
+.cta-band { padding-block: var(--section-y); }
+.cta-band.band-dark { background: var(--char-800); }
+.cta-band__inner {
+  display: grid;
+  gap: var(--sp-6);
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .cta-band__inner { grid-template-columns: 1.2fr 1fr; gap: var(--sp-12); }
+}
+.cta-band h2 { color: var(--stone-50); }
+.cta-band p { color: var(--dark-text-muted); }
+
+.callout {
+  padding: var(--sp-5);
+  background: var(--accent-wash);
+  border-radius: var(--radius-card);
+  box-shadow: inset 4px 0 0 0 var(--accent);
+}
+.callout p { color: var(--text-secondary); }
+.callout p + p { margin-top: var(--sp-3); }
+
+/* ============================================================================
+   QUOTE FORM
+   Three steps, seven fields, contact last. No email, no budget, no calendar.
+   Step one is the cheapest possible question and it is a tap, not a text
+   field. Without JavaScript every step renders, so the form still submits.
+   ============================================================================ */
+
+.quote-form {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: var(--sp-5);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+@media (min-width: 640px) { .quote-form { padding: var(--sp-8); } }
+
+.quote-form__progress {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-5);
+}
+.quote-form__progress li {
+  flex: 1;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--stone-300);
+}
+.quote-form__progress li[data-state="done"],
+.quote-form__progress li[data-state="current"] { background: var(--accent); }
+
+.quote-form__count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+
+.quote-form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.quote-form fieldset + fieldset { margin-top: var(--sp-8); }
+.quote-form.is-enhanced fieldset + fieldset { margin-top: 0; }
+.quote-form.is-enhanced fieldset[hidden] { display: none; }
+
+.quote-form legend {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: var(--h2-variation);
+  font-size: var(--size-h3);
+  line-height: 1.2;
+  padding: 0;
+  margin-bottom: var(--sp-4);
+}
+
+.field { margin-bottom: var(--sp-5); }
+.field > label,
+.field > .field__label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: var(--label-variation);
+  font-size: var(--size-small);
+  margin-bottom: var(--sp-2);
+}
+.field__hint {
+  display: block;
+  font-size: var(--size-small);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+  font-variation-settings: var(--body-variation);
+}
+.field__optional {
+  color: var(--text-muted);
+  font-variation-settings: var(--body-variation);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--tap-comfort);
+  padding: 0.75rem 0.875rem;
+  background: var(--stone-50);
+  color: var(--text);
+  border: 2px solid var(--border-control);
+  border-radius: var(--radius-control);
+  font-size: 1rem;
+}
+.textarea { min-height: 6.5rem; resize: vertical; }
+.input:hover, .select:hover, .textarea:hover { border-color: var(--char-600); }
+.input::placeholder, .textarea::placeholder { color: var(--text-subtle); }
+
+.select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--char-700) 50%),
+    linear-gradient(135deg, var(--char-700) 50%, transparent 50%);
+  background-position: right 1.15rem center, right 0.8rem center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 2.5rem;
+}
+
+/* Choice tiles. One tap, zero typing. */
+.choice-grid {
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+}
+.choice {
+  position: relative;
+  display: block;
+}
+.choice input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.choice__face {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 56px;
+  height: 100%;
+  padding: var(--sp-3);
+  background: var(--stone-100);
+  border: 2px solid var(--border-control);
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: var(--label-variation);
+  font-size: var(--size-small);
+  line-height: 1.2;
+  transition: border-color var(--speed-fast) var(--ease),
+              background-color var(--speed-fast) var(--ease);
+}
+.choice__face svg { width: 26px; height: 26px; flex: none; fill: var(--char-700); }
+.choice input:hover + .choice__face { border-color: var(--char-600); }
+.choice input:checked + .choice__face {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.choice input:checked + .choice__face svg { fill: var(--accent-ink); }
+.choice input:focus-visible + .choice__face {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* The photo ask is framed as what the buyer gets back, not what we want. */
+.file-field {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--stone-100);
+  border: 2px dashed var(--border-control);
+  border-radius: var(--radius-control);
+}
+.file-field input[type="file"] { font-size: var(--size-small); max-width: 100%; }
+
+.quote-form__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+.quote-form__nav .btn { flex: 1 1 auto; }
+.quote-form__back {
+  min-height: var(--tap-comfort);
+  padding: 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.quote-form__back:hover { color: var(--text); }
+
+.quote-form__alt {
+  margin-top: var(--sp-4);
+  font-size: var(--size-small);
+  color: var(--text-muted);
+  text-align: center;
+}
+.quote-form__alt a {
+  font-variation-settings: var(--body-strong-variation);
+  white-space: nowrap;
+}
+
+/* ============================================================================
+   STICKY MOBILE BAR
+   One competitor in ten has one of these, and it is the national franchise.
+   Every independent in northwest Georgia has none.
+   ============================================================================ */
+
+.sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-bar);
+  display: flex;
+  background: var(--char-900);
+  border-top: 3px solid var(--accent);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transform: translateY(0);
+  transition: transform var(--speed) var(--ease);
+}
+/* Visible by default so the bar still works with no JavaScript. ui.js tucks
+   it away on load and brings it back after roughly one viewport of scroll. */
+.sticky-bar.is-tucked { transform: translateY(105%); }
+
+.sticky-bar a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: var(--bar-height);
+  color: var(--stone-200);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 90;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.sticky-bar a + a { border-left: 1px solid var(--char-700); }
+.sticky-bar a svg { width: 20px; height: 20px; fill: currentColor; }
+/* Right thumb bias: the call sits last so it lands under the thumb. */
+.sticky-bar a:last-child {
+  background: var(--accent-solid);
+  color: var(--on-accent);
+  border-left: 0;
+}
+
+@media (min-width: 900px) {
+  .sticky-bar { display: none; }
+}
+
+/* ============================================================================
+   FOOTER
+   The full lockup finally gets to run at a size where it is legible. NAP
+   minus the street: he hides his address on the profile deliberately and the
+   site does not override that decision.
+   ============================================================================ */
+
+.site-footer { background: var(--dark-bg); color: var(--dark-text); }
+.site-footer__top {
+  display: grid;
+  gap: var(--sp-8);
+  padding-block: var(--sp-10);
+}
+@media (min-width: 820px) {
+  .site-footer__top { gap: var(--sp-16); padding-block: var(--section-y); }
+}
+@media (min-width: 820px) {
+  .site-footer__top { grid-template-columns: minmax(14rem, 1fr) 2fr; gap: var(--sp-16); }
+}
+
+.site-footer__lockup { max-width: 10.5rem; }
+@media (min-width: 560px) { .site-footer__lockup { max-width: 13rem; } }
+@media (min-width: 820px) { .site-footer__lockup { max-width: 15rem; } }
+.site-footer__lockup img { width: 100%; height: auto; }
+
+.site-footer__nap {
+  font-style: normal;
+  margin-top: var(--sp-5);
+  font-size: var(--size-small);
+  color: var(--dark-text-muted);
+  line-height: 1.6;
+}
+.site-footer__nap b {
+  display: block;
+  color: var(--stone-50);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 84;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+.site-footer__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--tap-min);
+  margin-top: var(--sp-2);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wght" 800, "wdth" 90;
+  font-size: 1.25rem;
+  color: var(--orange-400);
+  text-decoration: none;
+}
+.site-footer__phone svg { width: 0.95em; height: 0.95em; fill: currentColor; flex: none; }
+.site-footer__phone:hover { text-decoration: underline; }
+
+.site-footer__cols {
+  display: grid;
+  gap: var(--sp-6) var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+@media (min-width: 560px) {
+  .site-footer__cols { gap: var(--sp-8) var(--sp-6); grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+}
+.site-footer h2,
+.site-footer__cols h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--orange-500);
+  margin-bottom: var(--sp-4);
+}
+.site-footer__cols ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.site-footer__cols a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--dark-text);
+  text-decoration: none;
+  font-size: var(--size-small);
+}
+.site-footer__cols a:hover { color: var(--orange-400); text-decoration: underline; }
+
+.site-footer__bottom {
+  border-top: 1px solid var(--char-700);
+  padding-block: var(--sp-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--size-small);
+  color: var(--dark-text-muted);
+}
+.site-footer__bottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--dark-text-muted);
+}
+
+/* ============================================================================
+   MISC
+   ============================================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-control);
+  background: var(--accent-wash-2);
+  color: var(--char-800);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: 0.6875rem;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--tap-min);
+  padding: 0 var(--sp-3);
+  border-radius: var(--radius-control);
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  font-size: var(--size-small);
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+
+.step-list { counter-reset: step; display: flex; flex-direction: column; gap: var(--gap-board); }
+.step-list > li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--sp-4);
+  align-items: start;
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: var(--sp-5);
+}
+.step-list > li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--char-800);
+  color: var(--stone-50);
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: var(--display-variation);
+  font-size: 1.5rem;
+}
+.step-list h3 { margin-bottom: var(--sp-2); }
+.step-list p { color: var(--text-secondary); font-size: var(--size-small); }
+
+/* ============================================================================
+   PAGE HEAD
+   The compact opener used by the service, market and guide layouts. The home
+   hero is a different component: this one leads with the argument and lets
+   the photograph sit beside it rather than under it.
+   ============================================================================ */
+
+.page-head { padding-block: var(--sp-10) var(--sp-6); }
+.page-head .stringer { margin-block: var(--sp-4); }
+.page-head h1 + .stringer { margin-top: var(--sp-5); }
+.page-head .lead { margin-top: var(--sp-2); }
+.page-head__actions { margin-top: var(--sp-6); }
+.page-head__where { margin-top: var(--sp-5); }
+
+.page-head--media .page-head__inner { display: grid; gap: var(--sp-8); }
+@media (min-width: 900px) {
+  .page-head--media { padding-block: var(--sp-16) var(--sp-10); }
+  .page-head--media .page-head__inner {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--sp-12);
+    align-items: center;
+  }
+}
+
+.cta-band__body { margin-top: var(--sp-4); }
+.cta-band .response-promise { margin-top: var(--sp-6); background: var(--char-900); }
+
+/* ============================================================================
+   GUIDE
+   ============================================================================ */
+
+.guide__updated { margin-top: var(--sp-5); }
+.guide__hero { margin-top: var(--sp-6); }
+.guide__figure { margin: 0; }
+
+.guide__related {
+  display: grid;
+  gap: var(--sp-8);
+  margin-top: var(--sp-8);
+}
+@media (min-width: 760px) {
+  .guide__related { grid-template-columns: repeat(3, 1fr); }
+}
+.guide__links { display: flex; flex-direction: column; gap: 2px; margin-top: var(--sp-3); }
+.guide__links a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--text);
+  text-decoration: none;
+  font-size: var(--size-small);
+  border-bottom: 1px solid var(--border);
+}
+.guide__links a:hover { color: var(--accent-ink); }
+
+/* The reading column lines up with the page head above it rather than
+   centering itself, so the eye does not jog sideways between the headline and
+   the first paragraph. */
+.prose--column { max-width: var(--width-prose); }
+
+.step-list { max-width: 54rem; }
+.step-list p { max-width: 46rem; }
+
+/* The form's own error line. role="alert", so it is announced the moment it
+   appears. Charcoal on an orange wash reads 10.72:1 and does not rely on
+   color alone to communicate the problem. */
+.quote-form__error {
+  margin-top: var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--accent-wash-2);
+  color: var(--char-800);
+  border-radius: var(--radius-control);
+  box-shadow: inset 4px 0 0 0 var(--accent-solid);
+  font-size: var(--size-small);
+  font-variation-settings: var(--body-strong-variation);
+  font-weight: 600;
+}
+
+/* The card media classes set a background shorthand of their own, which wipes
+   the pending pattern. Restate it at higher specificity. */
+.project-card__media.photo--pending,
+.service-card__media.photo--pending {
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(180deg,
+      var(--stone-300) 0 14px,
+      var(--stone-200) 14px 18px);
+}

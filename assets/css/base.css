@@ -1,0 +1,450 @@
+/* ============================================================================
+   Base: reset, document, typography, layout primitives, the three motifs.
+   Depends on tokens.css. Mobile first throughout.
+   ============================================================================ */
+
+/* --- Reset ---------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd, ol, ul {
+  margin: 0;
+}
+
+ul[class], ol[class] { list-style: none; padding: 0; }
+
+/* Lists inside components carry no class of their own often enough that the
+   attribute selector above is not sufficient on its own. */
+nav ul, nav ol, footer ul, footer ol { list-style: none; padding: 0; margin: 0; }
+
+address { font-style: normal; }
+
+img, picture, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+img { height: auto; }
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button { background: none; border: 0; }
+
+table { border-collapse: collapse; width: 100%; }
+
+/* --- Document ------------------------------------------------------------- */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-variation-settings: var(--body-variation);
+  font-size: var(--size-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Room for the sticky call bar so it never covers the last line of a page. */
+@media (max-width: 899px) {
+  body.has-sticky-bar {
+    padding-bottom: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* --- Focus. One ring, brand orange, clears 3:1 on bone, white and charcoal. */
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-control);
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: var(--sp-2);
+  z-index: var(--z-skip);
+  transform: translateY(-160%);
+  background: var(--char-900);
+  color: var(--stone-50);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-control);
+  font-weight: 600;
+  font-variation-settings: var(--label-variation);
+  text-decoration: none;
+  transition: transform var(--speed) var(--ease);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* --- Typography ----------------------------------------------------------- */
+
+/* font-weight is set alongside every font-variation-settings on purpose. The
+   variation axis does not update the computed font-weight, so without it the
+   fallback stack renders at 400 and automated contrast checkers misjudge
+   which text qualifies as large. */
+h1, .t-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: var(--display-variation);
+  font-size: var(--size-h1);
+  line-height: var(--leading-display);
+  letter-spacing: var(--track-display);
+  text-transform: uppercase;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.t-display--hero { font-size: var(--size-display); }
+
+h2, .t-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: var(--h2-variation);
+  font-size: var(--size-h2);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--track-h2);
+  color: var(--text);
+  text-wrap: balance;
+}
+
+h3, .t-h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: var(--h3-variation);
+  font-size: var(--size-h3);
+  line-height: 1.25;
+  color: var(--text);
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 95;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+/* The eyebrow and the micro-label tracking come straight off the lockup.
+   SERVICES UNLIMITED measured 0.23 to 0.39 cap-heights of letter gap,
+   DECK & FENCE CONTRACTOR measured 0.39 to 1.06. */
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: var(--eyebrow-variation);
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  line-height: 1.2;
+  margin: 0 0 var(--sp-3);
+}
+
+.micro-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 88;
+  font-size: 0.6875rem;
+  letter-spacing: var(--track-micro);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* The flanked eyebrow. Both sub-lines in the lockup are tracked-out caps with
+   short rules either side at mid cap height, rule weight about a quarter of
+   the cap height, which is roughly the stroke weight of the letters. */
+.eyebrow--flanked {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.eyebrow--flanked::before,
+.eyebrow--flanked::after {
+  content: "";
+  height: 2px;
+  width: 22px;
+  flex: none;
+  background: currentColor;
+}
+.eyebrow--flanked.is-left::after { display: none; }
+
+.lead {
+  font-size: var(--size-lead);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 40rem;
+}
+
+strong, b { font-weight: 600; font-variation-settings: var(--body-strong-variation); }
+
+a {
+  color: var(--accent-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+/* Scoped with :where() so it sets the link color for prose without
+   outranking a button's own color. A pill on a dark band was rendering its
+   label in brand orange on brand orange, which is invisible, and the button
+   rule is one specificity point lighter. */
+.band-dark :where(a) { color: var(--dark-accent); }
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin: var(--sp-8) 0;
+}
+
+::selection {
+  background: var(--orange-200);
+  color: var(--char-900);
+}
+
+/* --- Prose ---------------------------------------------------------------- */
+
+.prose > * + * { margin-top: var(--sp-5); }
+.prose p,
+.prose li { max-width: var(--measure); }
+.prose h2 { margin-top: var(--sp-12); }
+.prose h3 { margin-top: var(--sp-8); }
+.prose ul,
+.prose ol { padding-left: 1.25em; }
+.prose ul { list-style: none; padding-left: 0; }
+.prose ul > li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-top: var(--sp-2);
+}
+/* Board tick, not a bullet dot. Square, like the deck boards. */
+.prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 10px;
+  height: 3px;
+  background: var(--accent);
+}
+.prose ol { counter-reset: n; list-style: none; padding-left: 0; }
+.prose ol > li {
+  counter-increment: n;
+  position: relative;
+  padding-left: 2.25rem;
+  margin-top: var(--sp-3);
+}
+.prose ol > li::before {
+  content: counter(n);
+  position: absolute;
+  left: 0;
+  top: 0.05em;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: grid;
+  place-items: center;
+  background: var(--char-800);
+  color: var(--stone-50);
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 90;
+  font-size: 0.8125rem;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: var(--sp-5);
+  font-size: var(--size-lead);
+  color: var(--text-secondary);
+}
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--width-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.wrap--wide  { max-width: var(--width-wide); }
+.wrap--prose { max-width: var(--width-prose); }
+
+.section { padding-block: var(--section-y); }
+.section--tight { padding-block: calc(var(--section-y) * 0.66); }
+.section--sunken { background: var(--bg-sunken); }
+
+.stack > * + * { margin-top: var(--sp-4); }
+.stack-6 > * + * { margin-top: var(--sp-6); }
+.stack-8 > * + * { margin-top: var(--sp-8); }
+
+.section-head { max-width: 44rem; margin-bottom: var(--sp-8); }
+.section-head > p { margin-top: var(--sp-4); }
+
+.grid { display: grid; gap: var(--sp-5); }
+@media (min-width: 600px)  { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px)  { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 600px)  { .grid--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .grid--4 { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 600px)  { .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================================
+   THE THREE MOTIFS
+   ============================================================================ */
+
+/* --- 1. The stringer. 40 degrees, measured 39.94 leading, 42.03 trailing.
+       Not one stripe: an orange bar and a charcoal bar in parallel with a
+       keyline of background between them. Direction is locked. Never mirror. */
+
+.stringer {
+  display: flex;
+  gap: var(--stringer-keyline);
+  height: 30px;
+  width: max-content;
+  overflow: hidden;
+}
+.stringer::before,
+.stringer::after {
+  content: "";
+  width: var(--stringer-bar);
+  height: 100%;
+  /* 40deg from horizontal is 50deg of skew off vertical. */
+  transform: skewX(-50deg);
+}
+.stringer::before { background: var(--accent); }
+.stringer::after  { background: var(--char-800); }
+.band-dark .stringer::after { background: var(--stone-200); }
+
+.stringer--lg { height: 46px; --stringer-bar: 14px; --stringer-keyline: 7px; }
+.stringer--sm { height: 20px; --stringer-bar: 7px;  --stringer-keyline: 4px; }
+
+/* Section divider: the stringer set on a full-width rule so it reads as a
+   joint rather than a floating pair of bars. */
+.stringer-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding-block: var(--sp-2);
+}
+.stringer-divider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--border-strong);
+}
+.band-dark .stringer-divider::after { background: var(--char-700); }
+
+/* Corner cut at exactly 40 degrees: run 140, rise 117, 117/140 = 0.836.
+   Same hand as the logo, the edge descends left to right. A full-bleed
+   40deg edge is not usable at page width (a 1200px span drops 1007px),
+   so the angle lives in bounded cuts and in the bars above. */
+.cut-corner {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    var(--cut-run) 100%,
+    0 calc(100% - var(--cut-rise))
+  );
+}
+@media (max-width: 599px) {
+  .cut-corner { --cut-run: 92px; --cut-rise: 77px; }
+}
+
+/* --- 2. The board stack. Radius is 2.7% of element height, so 5px on cards
+       and 4px on controls. Stacked items separate by a gap of background at
+       0.35 x item height, never by a hairline rule. ---------------------- */
+
+.board-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-board);
+}
+.board-stack > * {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  min-height: 64px;
+}
+
+/* --- 3. The baluster railing. Bar equals gap, run terminated by heavier
+       posts at 2.4x to 2.9x a baluster. Use once per page at most. ------- */
+
+.baluster-divider {
+  height: 16px;
+  max-width: 24rem;
+  margin-inline: auto;
+  background:
+    linear-gradient(var(--char-800), var(--char-800)) left  / var(--baluster-post) 100% no-repeat,
+    linear-gradient(var(--char-800), var(--char-800)) right / var(--baluster-post) 100% no-repeat,
+    repeating-linear-gradient(90deg,
+      var(--char-800) 0 var(--baluster-bar),
+      transparent var(--baluster-bar) calc(var(--baluster-bar) + var(--baluster-gap)));
+}
+.band-dark .baluster-divider {
+  background:
+    linear-gradient(var(--char-500), var(--char-500)) left  / var(--baluster-post) 100% no-repeat,
+    linear-gradient(var(--char-500), var(--char-500)) right / var(--baluster-post) 100% no-repeat,
+    repeating-linear-gradient(90deg,
+      var(--char-500) 0 var(--baluster-bar),
+      transparent var(--baluster-bar) calc(var(--baluster-bar) + var(--baluster-gap)));
+}
+
+/* --- Motion --------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Print ---------------------------------------------------------------- */
+
+@media print {
+  .site-header,
+  .sticky-bar,
+  .quote-form { display: none !important; }
+  body { background: #fff; color: #000; }
+}
