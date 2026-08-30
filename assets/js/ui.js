@@ -228,10 +228,82 @@
 
   /* ---------------------------------------------------------------- boot */
 
+
+  /**
+   * REVIEW SLIDER.
+   *
+   * The track is a scroll-snap container, so it already works with no
+   * JavaScript: swipe on a phone, arrow keys once focused, and the cards are
+   * all in the DOM and readable either way. This only adds the two buttons and
+   * the auto-advance on top.
+   *
+   * Auto-advance is OFF under prefers-reduced-motion, and it stops for good the
+   * moment somebody interacts. A carousel that keeps yanking the content away
+   * from a reader who has taken hold of it is the worst version of this
+   * component.
+   */
+  function initReviewSlider() {
+    var roots = document.querySelectorAll(".reviews-slider");
+    Array.prototype.forEach.call(roots, function (root) {
+      var track = root.querySelector("[data-review-track]");
+      if (!track) return;
+      var prev = root.querySelector("[data-review-prev]");
+      var next = root.querySelector("[data-review-next]");
+      var slides = track.querySelectorAll(".review-slide");
+      if (slides.length < 2) {
+        if (prev) prev.hidden = true;
+        if (next) next.hidden = true;
+        return;
+      }
+
+      var step = function () {
+        var first = slides[0];
+        var second = slides[1];
+        // Real distance between two cards, gap included, so the step stays
+        // correct at every breakpoint without hardcoding a card width.
+        return second ? second.offsetLeft - first.offsetLeft : first.offsetWidth;
+      };
+
+      var go = function (dir) {
+        track.scrollBy({ left: dir * step(), behavior: motionOK() ? "smooth" : "auto" });
+      };
+
+      if (prev) prev.addEventListener("click", function () { stop(); go(-1); });
+      if (next) next.addEventListener("click", function () { stop(); go(1); });
+
+      var timer = null;
+      function stop() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+      function start() {
+        if (!motionOK() || timer) return;
+        timer = setInterval(function () {
+          var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+          if (atEnd) track.scrollTo({ left: 0, behavior: "smooth" });
+          else go(1);
+        }, 6000);
+      }
+
+      // Any sign of a human takes the wheel away from the timer.
+      ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (evt) {
+        track.addEventListener(evt, stop, { passive: true });
+      });
+      root.addEventListener("mouseenter", stop);
+      root.addEventListener("focusin", stop);
+
+      start();
+    });
+  }
+
+  function motionOK() {
+    return !window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
   function boot() {
     initNav();
     initStickyBar();
     initQuoteForm();
+    initReviewSlider();
   }
 
   if (document.readyState === "loading") {

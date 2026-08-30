@@ -1436,3 +1436,75 @@
       var(--stone-300) 0 14px,
       var(--stone-200) 14px 18px);
 }
+
+/* ------------------------------------------------------------ review slider
+   Verbatim Google reviews on a scroll-snap track. Works with no JavaScript:
+   the cards are all in the DOM, swipeable, and the track is focusable so the
+   arrow keys scroll it. ui.js adds the buttons and the auto-advance on top.
+*/
+.reviews-slider { display: grid; gap: var(--gap-board); }
+
+.reviews-slider__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+}
+.reviews-slider__head h2 { margin: 0; }
+
+.reviews-slider__nav { display: flex; gap: .5rem; }
+.reviews-slider__btn {
+  inline-size: 2.75rem; block-size: 2.75rem;      /* a real touch target */
+  display: grid; place-items: center;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+}
+.reviews-slider__btn svg { inline-size: 1.25rem; block-size: 1.25rem; fill: currentColor; }
+.reviews-slider__btn:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.reviews-slider__btn[hidden] { display: none; }
+
+.reviews-slider__track {
+  display: grid;
+  grid-auto-flow: column;
+  /* A FIXED track size, not minmax(0, ...). minmax with a zero floor lets the
+     columns shrink to fit the container, so all six cards squeezed into one
+     screen as slivers instead of overflowing into a scrollable row. */
+  grid-auto-columns: 82%;
+  gap: var(--gap-board);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* room for the focus ring, and it stops the cards clipping at the edges */
+  padding: 2px;
+  scrollbar-width: thin;
+}
+@media (min-width: 700px)  { .reviews-slider__track { grid-auto-columns: calc(50% - var(--gap-board) / 2); } }
+@media (min-width: 1040px) { .reviews-slider__track { grid-auto-columns: calc(33.333% - var(--gap-board) * 2 / 3); } }
+
+.review-slide {
+  scroll-snap-align: start;
+  display: flex; flex-direction: column; gap: .85rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.4rem 1.5rem;
+}
+.review-slide__stars { display: inline-flex; gap: .1rem; color: var(--accent); }
+.review-slide__stars svg { inline-size: 1.05rem; block-size: 1.05rem; fill: currentColor; }
+
+.review-slide blockquote { margin: 0; }
+.review-slide blockquote p { margin: 0; line-height: var(--leading-body); }
+
+.review-slide__attrib {
+  margin: auto 0 0; display: flex; flex-wrap: wrap; gap: .15rem .6rem;
+  font-size: var(--size-small); color: var(--text-muted);
+}
+.review-slide__attrib b { color: var(--text); }
+.review-slide__attrib span::before { content: "· "; }
+
+.reviews-slider__foot { margin: 0; font-size: var(--size-small); }
+
+/* The timer is disabled in JS under reduced motion; this covers the scroll. */
+@media (prefers-reduced-motion: reduce) {
+  .reviews-slider__track { scroll-behavior: auto; }
+}
