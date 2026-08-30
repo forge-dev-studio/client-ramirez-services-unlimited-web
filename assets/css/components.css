@@ -606,6 +606,30 @@
 .project-grid { display: grid; gap: var(--gap-board); }
 @media (min-width: 700px) { .project-grid { grid-template-columns: repeat(2, 1fr); } }
 
+/* ---------------------------------------------------------------- idea list
+   Guide "ideas" entries. These were authored as gallery captions and rendered
+   as <figure> elements wrapping a photo call with no photo behind it, so the
+   guide tier shipped grids of floating captions. They are a list of ideas, so
+   they are a list, set on the board gap like every other stacked group here.
+*/
+.idea-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--gap-board);
+}
+@media (min-width: 700px) { .idea-list { grid-template-columns: repeat(2, 1fr); } }
+.idea-list li {
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1rem 1.15rem;
+  line-height: var(--leading-body);
+}
+/* The stringer: one bright edge, the same cue the project cards use. */
+.idea-list li { border-left: 3px solid var(--accent); }
+
 /* ============================================================================
    REVIEW CARD
    Verbatim only. Review text is never edited or paraphrased, and there is no
