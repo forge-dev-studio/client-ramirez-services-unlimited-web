@@ -219,8 +219,109 @@
       if (validate(steps[current])) show(current + 1, true);
     });
 
+    /* ------------------------------------------------------------ phone
+       Format at the KEYSTROKE, not at submit.
+
+       Two Pinturas leads arrived unreachable in August: one with area code
+       700 (a typo for 770, and 700 is a special-services code) and one with
+       the caller's surname typed into the phone box. Both sailed through
+       because this markup carries `novalidate` AND `type="tel"` validates
+       nothing by spec, it only changes the mobile keyboard.
+
+       It matters more here than anywhere else on the estate: this form has
+       no email field by design, so the phone number is the ONLY way back to
+       the customer. A fumbled digit does not degrade the lead, it loses it.
+
+       Reformatting as they type means a surname produces an EMPTY box, which
+       the person sees while they are still looking at the field. Prevention
+       beats an error message. */
+    var phoneInput = form.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function () {
+        var d = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+        phoneInput.value =
+          d.length > 6 ? "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6)
+          : d.length > 3 ? "(" + d.slice(0, 3) + ") " + d.slice(3)
+          : d.length > 0 ? "(" + d + ""
+          : "";
+      });
+    }
+
+    /* NANP structure, which is what actually catches 700. A "ten digits"
+       check does not: 7005550123 is ten digits. Area code and exchange both
+       have to start 2-9, and N11 and 700/900 are not assignable. */
+    function phoneUsable(value) {
+      var d = String(value || "").replace(/\D/g, "");
+      if (d.length === 11 && d.charAt(0) === "1") d = d.slice(1);
+      if (d.length !== 10) return false;
+      var area = d.slice(0, 3), exch = d.slice(3, 6);
+      if (area.charAt(0) < "2" || exch.charAt(0) < "2") return false;
+      if (/^(\d)11$/.test(area) || area === "700" || area === "900") return false;
+      return true;
+    }
+
+    /* ----------------------------------------------------------- submit */
+    var donePanel = document.querySelector("[data-form-done]");
+    var endpoint = form.getAttribute("data-endpoint");
+    var clientKey = form.getAttribute("data-client");
+    var sending = false;
+
+    function fail(message) {
+      if (!errorBox) return;
+      errorBox.textContent = message;
+      errorBox.removeAttribute("hidden");
+    }
+
     form.addEventListener("submit", function (event) {
-      if (!validate(steps[current])) event.preventDefault();
+      event.preventDefault();
+      if (errorBox) errorBox.setAttribute("hidden", "");
+      if (!validate(steps[current])) return;
+
+      if (phoneInput && !phoneUsable(phoneInput.value)) {
+        fail("That phone number does not look right. He needs a number that rings.");
+        phoneInput.focus();
+        return;
+      }
+
+      // No endpoint configured means the form is not wired. Say so rather
+      // than silently pretending it sent, which is what it did before.
+      if (!endpoint || !clientKey) {
+        fail("This form is not connected yet. Please call instead.");
+        return;
+      }
+      if (sending) return;
+      sending = true;
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalLabel = submitBtn ? submitBtn.textContent : null;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending..."; }
+
+      var payload = {};
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name) return;
+        if (el.type === "radio" && !el.checked) return;
+        payload[el.name] = el.value;
+      });
+
+      fetch(endpoint + "?client=" + encodeURIComponent(clientKey), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) { return res.ok ? res : Promise.reject(new Error("http " + res.status)); })
+        .then(function () {
+          form.setAttribute("hidden", "");
+          if (donePanel) {
+            donePanel.removeAttribute("hidden");
+            donePanel.setAttribute("tabindex", "-1");
+            donePanel.focus();
+          }
+        })
+        .catch(function () {
+          sending = false;
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+          fail("That did not go through. Please call " + (form.getAttribute("data-phone") || "us") + " instead.");
+        });
     });
 
     show(0, false);
