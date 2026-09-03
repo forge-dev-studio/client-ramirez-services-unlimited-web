@@ -559,8 +559,13 @@
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.project-card__meta > span { display: inline-flex; align-items: center; gap: var(--sp-2); }
-.project-card__meta > span::before {
+.project-card__meta > span,
+.project-card__meta > a { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.project-card__meta > a { color: inherit; text-decoration: none; }
+.project-card__meta > a:hover,
+.project-card__meta > a:focus-visible { text-decoration: underline; }
+.project-card__meta > span::before,
+.project-card__meta > a::before {
   content: "";
   width: 8px;
   height: 3px;
@@ -1360,6 +1365,10 @@
 .page-head .lead { margin-top: var(--sp-2); }
 .page-head__actions { margin-top: var(--sp-6); }
 .page-head__where { margin-top: var(--sp-5); }
+/* A page with no honest photograph yet (chain link) drops the media column;
+   the text keeps a reading width instead of stretching its buttons across
+   the whole page. */
+.page-head:not(.page-head--media) .page-head__text { max-width: 44rem; }
 
 .page-head--media .page-head__inner { display: grid; gap: var(--sp-8); }
 @media (min-width: 900px) {
