@@ -1194,7 +1194,7 @@
     box-shadow: 0 8px 24px rgba(15, 19, 23, 0.28);
   }
   /* The tuck has to clear the bottom offset too, or a sliver stays showing. */
-  .sticky-bar.is-tucked { transform: translateY(calc(100% + var(--sp-8))); }
+  .sticky-bar.is-tucked { transform: translateY(calc(100% + var(--sp-8))); box-shadow: none; }
   .sticky-bar a {
     flex-direction: row;
     gap: var(--sp-2);
@@ -1459,36 +1459,47 @@
   font-weight: 600;
 }
 
-/* The ask in the middle of a service page, for the desktop visitor the
-   sticky bar no longer follows. */
-.mid-cta { padding-block: var(--sp-8); }
-.mid-cta__inner {
-  display: grid;
-  gap: var(--sp-5);
-  padding: var(--sp-6);
-  background: var(--accent-wash);
-  border-left: 4px solid var(--accent);
-  border-radius: var(--radius-card);
-}
-.mid-cta__line {
-  margin: 0;
-  max-width: 38rem;
-  color: var(--text);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-variation-settings: "wght" 700, "wdth" 92;
-  font-size: var(--size-lead);
-  line-height: 1.35;
-}
+/* The estimate form beside a page heading (contact, estimate, and a service
+   page with no photograph yet). A form is taller than the text beside it,
+   so both columns start at the top instead of centering on each other. */
 @media (min-width: 900px) {
-  .mid-cta__inner {
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: var(--sp-8);
-    padding: var(--sp-6) var(--sp-8);
-  }
-  .mid-cta__actions { flex-wrap: nowrap; }
+  .page-head--form .page-head__inner { align-items: start; }
 }
+
+/* The estimate form as its own section (service pages after the photos, the
+   home page after the reviews). */
+.quote-section__inner { display: grid; gap: var(--sp-6); }
+.quote-section__lead { margin-top: var(--sp-2); color: var(--text-secondary); }
+.quote-section__points { margin: var(--sp-4) 0 var(--sp-5); padding: 0; list-style: none; }
+.quote-section__points li {
+  position: relative;
+  padding-left: var(--sp-5);
+  margin-bottom: var(--sp-2);
+  color: var(--text-secondary);
+}
+.quote-section__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+}
+.quote-section__points b { color: var(--text); }
+@media (min-width: 900px) {
+  .quote-section__inner {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--sp-12);
+    align-items: start;
+  }
+  /* The form is the tall column; the reasons stay in view beside it. */
+  .quote-section__head { position: sticky; top: calc(var(--header-height) + var(--sp-8)); }
+}
+
+/* Every estimate button on a page with the form jumps to #quote. Clear the
+   sticky header, or the first question lands underneath it. */
+#quote { scroll-margin-top: calc(var(--header-height) + var(--sp-4)); }
 
 .contact-nap {
   font-style: normal;

@@ -4,7 +4,8 @@
    Three jobs and nothing else:
      1. The header menu on small screens.
      2. The sticky action bar, which tucks away until the visitor has scrolled
-        past the hero and then never leaves.
+        past the hero, and again whenever the page's own estimate form is on
+        screen, where a button pointing at the form is noise.
      3. The three step quote form, which is a plain single page form until
         this file takes it over. That includes ticking the project type a
         service page already answered, passed as /estimate/?type=fence.
@@ -75,11 +76,24 @@
       return Math.min(window.innerHeight * 0.9, 700);
     };
 
+    // While the embedded form (#quote) is on screen, the bar's estimate button
+    // points at what the visitor is already looking at, and on a desktop the
+    // floating pill sat on top of the form's Next button. Tuck it until the
+    // form scrolls away. No IntersectionObserver: the old behavior stands.
+    var quoteInView = false;
+    var quote = document.getElementById("quote");
+    if (quote && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        quoteInView = entries[0].isIntersecting;
+        update();
+      }, { threshold: 0.1 }).observe(quote);
+    }
+
     var ticking = false;
     function update() {
       ticking = false;
       var past = window.pageYOffset > threshold();
-      bar.classList.toggle("is-tucked", !past);
+      bar.classList.toggle("is-tucked", !past || quoteInView);
     }
 
     window.addEventListener("scroll", function () {
