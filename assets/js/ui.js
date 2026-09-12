@@ -8,9 +8,12 @@
      3. The three step quote form, which is a plain single page form until
         this file takes it over.
 
-   No submission handling lives here. No tracking lives here. Everything below
-   degrades to working HTML if this file fails to load, which is the whole
-   reason the form renders all three steps in the markup.
+   No tracking lives here. track.js owns attribution and the conversion
+   events; this file only adds track.js's payload to the form and tells it
+   when the worker confirmed a send. If track.js is missing, the form sends
+   exactly as it did before. Everything below degrades to working HTML if
+   this file fails to load, which is the whole reason the form renders all
+   three steps in the markup.
    ============================================================================ */
 
 (function () {
@@ -303,6 +306,18 @@
         payload[el.name] = el.value;
       });
 
+      // Where the visitor came from, spread in LAST so a form field can never
+      // shadow it. The worker reads source, channel, page and attribution
+      // beside the form fields, not through them.
+      if (window.RSUTrack && typeof window.RSUTrack.payload === "function") {
+        try {
+          var extra = window.RSUTrack.payload();
+          for (var key in extra) {
+            if (Object.prototype.hasOwnProperty.call(extra, key)) payload[key] = extra[key];
+          }
+        } catch (e) { /* measurement must never stop a lead */ }
+      }
+
       fetch(endpoint + "?client=" + encodeURIComponent(clientKey), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -310,6 +325,10 @@
       })
         .then(function (res) { return res.ok ? res : Promise.reject(new Error("http " + res.status)); })
         .then(function () {
+          // Counted only here, after the worker answered 2xx.
+          if (window.RSUTrack && typeof window.RSUTrack.lead === "function") {
+            try { window.RSUTrack.lead(); } catch (e) { /* never block the done panel */ }
+          }
           form.setAttribute("hidden", "");
           if (donePanel) {
             donePanel.removeAttribute("hidden");
