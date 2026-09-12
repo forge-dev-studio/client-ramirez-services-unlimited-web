@@ -65,6 +65,14 @@ body {
     padding-bottom: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
   }
 }
+/* Desktop: the bar is a floating pill, 52px tall and 24px off the bottom
+   (components.css). The footer keeps that much dark ground clear under its
+   last row, so the pill never sits on the Privacy link. */
+@media (min-width: 900px) {
+  body.has-sticky-bar .site-footer {
+    padding-bottom: calc(52px + var(--sp-6) * 2);
+  }
+}
 
 /* --- Focus. One ring, brand orange, clears 3:1 on bone, white and charcoal. */
 

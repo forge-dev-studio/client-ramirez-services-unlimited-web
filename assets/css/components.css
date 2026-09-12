@@ -220,7 +220,6 @@
   .header-call .header-call__digits { display: inline; }
   .header-call .header-call__word { display: none; }
 }
-
 .nav-toggle {
   display: inline-flex;
   align-items: center;
@@ -1163,6 +1162,11 @@
   text-transform: uppercase;
 }
 .sticky-bar a + a { border-left: 1px solid var(--char-700); }
+.sticky-bar__long { display: none; }
+@media (min-width: 900px) {
+  .sticky-bar__short { display: none; }
+  .sticky-bar__long { display: inline; }
+}
 .sticky-bar a svg { width: 20px; height: 20px; fill: currentColor; }
 /* Right thumb bias: the call sits last so it lands under the thumb. */
 .sticky-bar a:last-child {
@@ -1171,8 +1175,41 @@
   border-left: 0;
 }
 
+/* DESKTOP, 2026-09-12. This used to be `display: none` from 900px up, which
+   took the estimate link away from every desktop visitor past the first
+   screen. The call never went away, because the header is sticky and carries
+   it. So on desktop the bar shrinks to one floating estimate pill, bottom
+   right, arriving on the same scroll threshold. Not in the header: at 1120px
+   and from 1280px up a header button pushed the call onto a second row. */
 @media (min-width: 900px) {
-  .sticky-bar { display: none; }
+  .sticky-bar {
+    left: auto;
+    right: var(--sp-6);
+    bottom: var(--sp-6);
+    border-top: 0;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    padding-bottom: 0;
+    background: var(--accent-solid);
+    box-shadow: 0 8px 24px rgba(15, 19, 23, 0.28);
+  }
+  /* The tuck has to clear the bottom offset too, or a sliver stays showing. */
+  .sticky-bar.is-tucked { transform: translateY(calc(100% + var(--sp-8))); }
+  .sticky-bar a {
+    flex-direction: row;
+    gap: var(--sp-2);
+    min-height: 52px;
+    padding: 0 1.4rem;
+    color: var(--on-accent);
+    font-size: 1rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .sticky-bar a:hover { background: var(--accent-hover); }
+  /* The header already holds the call at every scroll depth. */
+  .sticky-bar a + a { display: none; }
+  /* A floating "estimate" button on the estimate page points at itself. */
+  .sticky-bar--estimate-page { display: none; }
 }
 
 /* ============================================================================
@@ -1378,6 +1415,85 @@
     gap: var(--sp-12);
     align-items: center;
   }
+}
+
+/* The rating and one review, inside the first screen of a service page.
+   Quiet on purpose: it sits under the two buttons and must not compete with
+   them, so no card, no fill, just a keyline in the brand orange. */
+.head-proof {
+  margin-top: var(--sp-6);
+  max-width: 36rem;
+}
+.head-proof__rating {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  min-height: var(--tap-min);
+  color: var(--text-secondary);
+  font-size: var(--size-small);
+  text-decoration: none;
+}
+.head-proof__rating b { color: var(--text); font-weight: 700; }
+.head-proof__rating:hover span:last-child { text-decoration: underline; }
+.head-proof__stars { display: inline-flex; gap: 2px; color: var(--accent); }
+.head-proof__stars svg { width: 17px; height: 17px; fill: currentColor; }
+.head-proof__quote {
+  margin: var(--sp-2) 0 0;
+  padding-left: var(--sp-4);
+  border-left: 3px solid var(--accent);
+}
+.head-proof__quote blockquote { margin: 0; }
+.head-proof__quote blockquote p {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--size-small);
+  line-height: 1.55;
+}
+.head-proof__quote blockquote p::before { content: "\201C"; }
+.head-proof__quote blockquote p::after  { content: "\201D"; }
+.head-proof__quote figcaption {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--size-small);
+  font-weight: 600;
+}
+
+/* The ask in the middle of a service page, for the desktop visitor the
+   sticky bar no longer follows. */
+.mid-cta { padding-block: var(--sp-8); }
+.mid-cta__inner {
+  display: grid;
+  gap: var(--sp-5);
+  padding: var(--sp-6);
+  background: var(--accent-wash);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-card);
+}
+.mid-cta__line {
+  margin: 0;
+  max-width: 38rem;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wght" 700, "wdth" 92;
+  font-size: var(--size-lead);
+  line-height: 1.35;
+}
+@media (min-width: 900px) {
+  .mid-cta__inner {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--sp-8);
+    padding: var(--sp-6) var(--sp-8);
+  }
+  .mid-cta__actions { flex-wrap: nowrap; }
+}
+
+.contact-nap {
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .cta-band__body { margin-top: var(--sp-4); }

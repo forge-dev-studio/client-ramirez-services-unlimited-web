@@ -6,7 +6,8 @@
      2. The sticky action bar, which tucks away until the visitor has scrolled
         past the hero and then never leaves.
      3. The three step quote form, which is a plain single page form until
-        this file takes it over.
+        this file takes it over. That includes ticking the project type a
+        service page already answered, passed as /estimate/?type=fence.
 
    No tracking lives here. track.js owns attribution and the conversion
    events; this file only adds track.js's payload to the form and tells it
@@ -419,9 +420,32 @@
     return !window.matchMedia || !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
+  /* ---------------------------------------------------- project type preset
+     Every estimate link on a service page carries ?type=, the form's own
+     project_type value for that page (services.11tydata.js). Someone who came
+     in on the fence page has already said "fence", so the box is ticked for
+     them. They still press Next themselves, and can change it. An unknown or
+     missing value ticks nothing, which is exactly the old behavior. Runs
+     before initQuoteForm so the first step renders already answered. */
+  function presetProjectType() {
+    var form = document.querySelector("[data-quote-form]");
+    if (!form || !window.URLSearchParams) return;
+    var wanted;
+    try { wanted = new URLSearchParams(window.location.search).get("type"); } catch (e) { return; }
+    if (!wanted || !/^[a-z-]{2,30}$/.test(wanted)) return;
+    var radios = form.querySelectorAll('input[name="project_type"]');
+    for (var i = 0; i < radios.length; i++) {
+      if (radios[i].value === wanted) {
+        radios[i].checked = true;
+        return;
+      }
+    }
+  }
+
   function boot() {
     initNav();
     initStickyBar();
+    presetProjectType();
     initQuoteForm();
     initReviewSlider();
   }
