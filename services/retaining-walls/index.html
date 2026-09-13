@@ -52,9 +52,9 @@
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
 
-<link rel="stylesheet" href="/assets/css/tokens.css?v=2026-09-12c">
-<link rel="stylesheet" href="/assets/css/base.css?v=2026-09-12c">
-<link rel="stylesheet" href="/assets/css/components.css?v=2026-09-12c">
+<link rel="stylesheet" href="/assets/css/tokens.css?v=2026-09-13">
+<link rel="stylesheet" href="/assets/css/base.css?v=2026-09-13">
+<link rel="stylesheet" href="/assets/css/components.css?v=2026-09-13">
 
 
 <meta name="msvalidate.01" content="79BE76CE8D2651747EE9A1F8B052187F">
@@ -180,8 +180,7 @@
 
 <aside class="head-proof" data-shared aria-label="Reviews on Google">
   <a class="head-proof__rating" href="/reviews/">
-    <span class="head-proof__stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></span>
-    <span><b>5.0 on Google</b> &middot; 28 reviews, all five stars</span>
+    <span class="head-proof__stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17.1 5.9 20.5l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg></span><span><b><span class="gbp-rating">5.0</span> on Google</b> &middot; <span class="gbp-count">28</span> reviews, all five stars</span>
   </a>
   <figure class="head-proof__quote">
     <blockquote><p>I would highly recommend Ramirez for any type of work. He did our retention wall and fixed a beam that was attacked by woodpeckers. Hervin and Bruce were always quick to respond to my calls and questions. Will use again in the future. Very reasonably priced also. Great team all around. Thank you guys!</p></blockquote><figcaption>LaVonne Getchell, retaining wall and beam repair</figcaption>
@@ -289,7 +288,7 @@
       <h2 id="quote-heading">Get a free estimate</h2>
       <p class="quote-section__lead">Three quick steps. We call you back ourselves, and nothing here commits you to anything.</p>
       <ul class="quote-section__points">
-        <li><b>5.0 on Google</b>, 28 reviews, all five stars</li>
+        <li><b><span class="gbp-rating">5.0</span> on Google</b>, <span class="gbp-count">28</span> reviews, all five stars</li>
         <li>English and Spanish spoken</li>
         <li>Rather talk it through? Call us.</li>
       </ul>
@@ -758,7 +757,28 @@
 </div>
 
 
-<script src="/assets/js/track.js?v=2026-09-12c" defer></script>
-<script src="/assets/js/ui.js?v=2026-09-12c" defer></script>
+<script src="/assets/js/track.js?v=2026-09-13" defer></script>
+<script src="/assets/js/ui.js?v=2026-09-13" defer></script>
+<script>
+/* Live Google rating and count, from the shared Forge reviews worker. Same
+   structure as Cochran and Journey Home Services: every .gbp-rating and
+   .gbp-count is server-rendered with the verified figure first, and this only
+   overwrites them once the worker answers with usable numbers. On any failure,
+   including the place not being allow-listed yet, the built figures stay, so
+   the page never shows a blank or a zero.
+
+   It does not touch the "all five stars" wording: the worker returns the
+   rating and the count, not the star breakdown. See the block in site.js. */
+(function () {
+  fetch("https://vbw-reviews.synergycloud.workers.dev/reviews?place=ChIJ71KvTdHoNm8R-95jTZUsB1Y")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d || typeof d.rating !== "number" || typeof d.total !== "number" || d.total < 1) return;
+      document.querySelectorAll(".gbp-rating").forEach(function (n) { n.textContent = d.rating.toFixed(1); });
+      document.querySelectorAll(".gbp-count").forEach(function (n) { n.textContent = String(d.total); });
+    })
+    .catch(function () {});
+})();
+</script>
 </body>
 </html>
