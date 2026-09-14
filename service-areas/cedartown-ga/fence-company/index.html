@@ -66,6 +66,25 @@
   gtag('config', 'G-RSLTH3PWX8');
   gtag('config', 'AW-17881496789');
   window.RSU_TRACK = { lead: 'AW-17881496789/zY0PCLrR5fQcENX5x85C', tap: 'AW-17881496789/t44yCL3R5fQcENX5x85C' };
+  gtag('config', 'AW-17881496789/VlXJCJ67tvccENX5x85C', {
+    phone_conversion_number: '(706) 879-8873',
+    phone_conversion_callback: function (formatted, mobile) {
+      var dial = String(mobile || '').replace(/[^\d+]/g, '');
+      if (!formatted || dial.replace(/\D/g, '').length < 10) return;
+      function swap() {
+        var links = document.querySelectorAll('a[href^="tel:"]');
+        for (var i = 0; i < links.length; i++) {
+          links[i].setAttribute('href', 'tel:' + dial);
+          var walk = document.createTreeWalker(links[i], NodeFilter.SHOW_TEXT);
+          for (var n = walk.nextNode(); n; n = walk.nextNode()) {
+            n.nodeValue = n.nodeValue.split('(706) 879-8873').join(formatted);
+          }
+        }
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', swap);
+      else swap();
+    }
+  });
 </script>
 
 
