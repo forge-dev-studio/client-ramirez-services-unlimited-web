@@ -246,17 +246,22 @@
        because this markup carries `novalidate` AND `type="tel"` validates
        nothing by spec, it only changes the mobile keyboard.
 
-       It matters more here than anywhere else on the estate: this form has
-       no email field by design, so the phone number is the ONLY way back to
-       the customer. A fumbled digit does not degrade the lead, it loses it.
-
        Reformatting as they type means a surname produces an EMPTY box, which
        the person sees while they are still looking at the field. Prevention
-       beats an error message. */
+       beats an error message.
+
+       A LEADING 1 IS THE COUNTRY CODE AND IS DROPPED. iPhone and Chrome
+       autofill often hand over "+1 (404) 915-5506". Cutting that to ten
+       digits kept the 1 and lost the last digit, "(140) 491-5550", which the
+       submit check then refused, so the customer had to spot it and retype.
+       No real area code starts with 1, so an eleventh digit behind a leading
+       1 always means the 1 goes. */
     var phoneInput = form.querySelector('input[name="phone"]');
     if (phoneInput) {
       phoneInput.addEventListener("input", function () {
-        var d = phoneInput.value.replace(/\D/g, "").slice(0, 10);
+        var d = phoneInput.value.replace(/\D/g, "");
+        if (d.length > 10 && d.charAt(0) === "1") d = d.slice(1);
+        d = d.slice(0, 10);
         phoneInput.value =
           d.length > 6 ? "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6)
           : d.length > 3 ? "(" + d.slice(0, 3) + ") " + d.slice(3)
@@ -276,6 +281,34 @@
       if (area.charAt(0) < "2" || exch.charAt(0) < "2") return false;
       if (/^(\d)11$/.test(area) || area === "700" || area === "900") return false;
       return true;
+    }
+
+    /* ------------------------------------------------------------ email
+       Required beside the phone (Eric, 2026-09-17), so a fumbled digit no
+       longer loses the customer. Same pattern the lead worker checks, and
+       sent lowercase: the CRM lowercases contact emails and then fails to
+       send an invoice to a capitalized copy of the same address. */
+    var emailInput = form.querySelector('input[name="email"]');
+    function emailUsable(value) {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(value || "").trim());
+    }
+
+    /* ------------------------------------------------------ other town
+       "Somewhere else nearby" opens a "Which town?" box. Hidden, it is also
+       disabled, which keeps it out of the step check and out of the payload. */
+    var townSelect = form.querySelector('select[name="town"]');
+    var townOther = form.querySelector("[data-town-other]");
+    var townOtherInput = townOther ? townOther.querySelector("input") : null;
+    function syncTown(focus) {
+      var on = townSelect.value === "other";
+      townOther.hidden = !on;
+      townOtherInput.disabled = !on;
+      townOtherInput.required = on;
+      if (on && focus) townOtherInput.focus();
+    }
+    if (townSelect && townOtherInput) {
+      townSelect.addEventListener("change", function () { syncTown(true); });
+      syncTown(false);
     }
 
     /* ----------------------------------------------------------- submit */
@@ -301,6 +334,12 @@
         return;
       }
 
+      if (emailInput && !emailUsable(emailInput.value)) {
+        fail("That email address does not look right. Check it for a typo.");
+        emailInput.focus();
+        return;
+      }
+
       // No endpoint configured means the form is not wired. Say so rather
       // than silently pretending it sent, which is what it did before.
       if (!endpoint || !clientKey) {
@@ -316,10 +355,11 @@
 
       var payload = {};
       Array.prototype.forEach.call(form.elements, function (el) {
-        if (!el.name) return;
+        if (!el.name || el.disabled) return;
         if (el.type === "radio" && !el.checked) return;
         payload[el.name] = el.value;
       });
+      if (payload.email) payload.email = payload.email.trim().toLowerCase();
 
       // Where the visitor came from, spread in LAST so a form field can never
       // shadow it. The worker reads source, channel, page and attribution

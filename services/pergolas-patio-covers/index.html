@@ -52,9 +52,9 @@
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
 
-<link rel="stylesheet" href="/assets/css/tokens.css?v=2026-09-13">
-<link rel="stylesheet" href="/assets/css/base.css?v=2026-09-13">
-<link rel="stylesheet" href="/assets/css/components.css?v=2026-09-13">
+<link rel="stylesheet" href="/assets/css/tokens.css?v=2026-09-17">
+<link rel="stylesheet" href="/assets/css/base.css?v=2026-09-17">
+<link rel="stylesheet" href="/assets/css/components.css?v=2026-09-17">
 
 
 <meta name="msvalidate.01" content="79BE76CE8D2651747EE9A1F8B052187F">
@@ -437,7 +437,7 @@
 
   
   <fieldset data-step="3">
-    <legend>Where should we call you?</legend>
+    <legend>How do we reach you?</legend>
 
     <div class="field" data-error="Add your name.">
       <label for="qf-name">Your name</label>
@@ -451,65 +451,79 @@
              inputmode="tel" autocomplete="tel" required>
     </div>
 
+    <div class="field" data-error="Add your email address.">
+      <label for="qf-email">Email</label>
+      <input class="input" type="email" id="qf-email" name="email"
+             inputmode="email" autocomplete="email" autocapitalize="off"
+             spellcheck="false" required>
+    </div>
+
     
     <div class="field" data-error="Choose your town so we can confirm we come out that far.">
       <label for="qf-town">Town</label>
       <select class="select" id="qf-town" name="town" autocomplete="address-level2" required>
         <option value="">Choose your town</option>
-        <option value="acworth">Acworth, GA</option>
-        <option value="adairsville">Adairsville, GA</option>
-        <option value="aragon">Aragon, GA</option>
-        <option value="atlanta">Atlanta, GA</option>
-        <option value="austell">Austell, GA</option>
-        <option value="ball-ground">Ball Ground, GA</option>
-        <option value="blue-ridge">Blue Ridge, GA</option>
-        <option value="buford">Buford, GA</option>
-        <option value="calhoun">Calhoun, GA</option>
-        <option value="canton">Canton, GA</option>
-        <option value="cartersville">Cartersville, GA</option>
-        <option value="cedartown">Cedartown, GA</option>
-        <option value="chatsworth">Chatsworth, GA</option>
-        <option value="chattanooga-valley">Chattanooga Valley, GA</option>
-        <option value="chickamauga">Chickamauga, GA</option>
-        <option value="cumming">Cumming, GA</option>
-        <option value="dacula">Dacula, GA</option>
-        <option value="dallas">Dallas, GA</option>
-        <option value="dalton">Dalton, GA</option>
-        <option value="ellijay">Ellijay, GA</option>
-        <option value="euharlee">Euharlee, GA</option>
-        <option value="fair-oaks">Fair Oaks, GA</option>
-        <option value="fairview">Fairview, GA</option>
-        <option value="fort-oglethorpe">Fort Oglethorpe, GA</option>
-        <option value="gainesville">Gainesville, GA</option>
-        <option value="hiram">Hiram, GA</option>
-        <option value="holly-springs">Holly Springs, GA</option>
-        <option value="jasper">Jasper, GA</option>
-        <option value="kennesaw">Kennesaw, GA</option>
-        <option value="kingston">Kingston, GA</option>
-        <option value="lafayette">LaFayette, GA</option>
-        <option value="lakeview">Lakeview, GA</option>
-        <option value="lindale">Lindale, GA</option>
-        <option value="mableton">Mableton, GA</option>
-        <option value="marietta">Marietta, GA</option>
-        <option value="mcdonough">McDonough, GA</option>
-        <option value="norcross">Norcross, GA</option>
-        <option value="powder-springs">Powder Springs, GA</option>
-        <option value="ringgold">Ringgold, GA</option>
-        <option value="rockmart">Rockmart, GA</option>
-        <option value="rome">Rome, GA</option>
-        <option value="rossville">Rossville, GA</option>
-        <option value="smyrna">Smyrna, GA</option>
-        <option value="south-fulton">South Fulton, GA</option>
-        <option value="stockbridge">Stockbridge, GA</option>
-        <option value="summerville">Summerville, GA</option>
-        <option value="tunnel-hill">Tunnel Hill, GA</option>
-        <option value="varnell">Varnell, GA</option>
-        <option value="villa-rica">Villa Rica, GA</option>
-        <option value="vinings">Vinings, GA</option>
-        <option value="white">White, GA</option>
-        <option value="woodstock">Woodstock, GA</option>
+        <option value="Acworth">Acworth, GA</option>
+        <option value="Adairsville">Adairsville, GA</option>
+        <option value="Aragon">Aragon, GA</option>
+        <option value="Atlanta">Atlanta, GA</option>
+        <option value="Austell">Austell, GA</option>
+        <option value="Ball Ground">Ball Ground, GA</option>
+        <option value="Blue Ridge">Blue Ridge, GA</option>
+        <option value="Buford">Buford, GA</option>
+        <option value="Calhoun">Calhoun, GA</option>
+        <option value="Canton">Canton, GA</option>
+        <option value="Cartersville">Cartersville, GA</option>
+        <option value="Cedartown">Cedartown, GA</option>
+        <option value="Chatsworth">Chatsworth, GA</option>
+        <option value="Chattanooga Valley">Chattanooga Valley, GA</option>
+        <option value="Chickamauga">Chickamauga, GA</option>
+        <option value="Cumming">Cumming, GA</option>
+        <option value="Dacula">Dacula, GA</option>
+        <option value="Dallas">Dallas, GA</option>
+        <option value="Dalton">Dalton, GA</option>
+        <option value="Ellijay">Ellijay, GA</option>
+        <option value="Euharlee">Euharlee, GA</option>
+        <option value="Fair Oaks">Fair Oaks, GA</option>
+        <option value="Fairview">Fairview, GA</option>
+        <option value="Fort Oglethorpe">Fort Oglethorpe, GA</option>
+        <option value="Gainesville">Gainesville, GA</option>
+        <option value="Hiram">Hiram, GA</option>
+        <option value="Holly Springs">Holly Springs, GA</option>
+        <option value="Jasper">Jasper, GA</option>
+        <option value="Kennesaw">Kennesaw, GA</option>
+        <option value="Kingston">Kingston, GA</option>
+        <option value="LaFayette">LaFayette, GA</option>
+        <option value="Lakeview">Lakeview, GA</option>
+        <option value="Lindale">Lindale, GA</option>
+        <option value="Mableton">Mableton, GA</option>
+        <option value="Marietta">Marietta, GA</option>
+        <option value="McDonough">McDonough, GA</option>
+        <option value="Norcross">Norcross, GA</option>
+        <option value="Powder Springs">Powder Springs, GA</option>
+        <option value="Ringgold">Ringgold, GA</option>
+        <option value="Rockmart">Rockmart, GA</option>
+        <option value="Rome">Rome, GA</option>
+        <option value="Rossville">Rossville, GA</option>
+        <option value="Smyrna">Smyrna, GA</option>
+        <option value="South Fulton">South Fulton, GA</option>
+        <option value="Stockbridge">Stockbridge, GA</option>
+        <option value="Summerville">Summerville, GA</option>
+        <option value="Tunnel Hill">Tunnel Hill, GA</option>
+        <option value="Varnell">Varnell, GA</option>
+        <option value="Villa Rica">Villa Rica, GA</option>
+        <option value="Vinings">Vinings, GA</option>
+        <option value="White">White, GA</option>
+        <option value="Woodstock">Woodstock, GA</option>
         <option value="other">Somewhere else nearby</option>
       </select>
+    </div>
+
+    
+    <div class="field" data-town-other hidden data-error="Tell us which town so we know how far out the job is.">
+      <label for="qf-town-other">Which town?</label>
+      <input class="input" type="text" id="qf-town-other" name="town_other"
+             maxlength="60" disabled>
     </div>
 
     <div class="field">
@@ -773,8 +787,8 @@
 </div>
 
 
-<script src="/assets/js/track.js?v=2026-09-13" defer></script>
-<script src="/assets/js/ui.js?v=2026-09-13" defer></script>
+<script src="/assets/js/track.js?v=2026-09-17" defer></script>
+<script src="/assets/js/ui.js?v=2026-09-17" defer></script>
 <script>
 /* Live Google rating and count, from the shared Forge reviews worker. Same
    structure as Cochran and Journey Home Services: every .gbp-rating and
