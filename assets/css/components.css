@@ -1415,6 +1415,24 @@
     gap: var(--sp-12);
     align-items: center;
   }
+  /* 2026-09-25: the photo fills the height of the text beside it. At a fixed
+     3:2 it was 289px tall next to ~600px of text at 1024 wide, floating in
+     blank space on all 44 service and area pages that have a head photo, and
+     it kept only a thin band of the upright phone shots most jobs are. The
+     clamp keeps it between 3:2 and 4:5 of its own column width (cqi). */
+  .page-head--media .page-head__media {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    container-type: inline-size;
+  }
+  .page-head--media .page-head__media .photo {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 66.667cqi;
+    max-height: 125cqi;
+  }
 }
 
 /* The rating and one review, inside the first screen of a service page.
