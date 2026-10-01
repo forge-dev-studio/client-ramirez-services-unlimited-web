@@ -323,6 +323,15 @@
       errorBox.removeAttribute("hidden");
     }
 
+    function showDone() {
+      form.setAttribute("hidden", "");
+      if (donePanel) {
+        donePanel.removeAttribute("hidden");
+        donePanel.setAttribute("tabindex", "-1");
+        donePanel.focus();
+      }
+    }
+
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       if (errorBox) errorBox.setAttribute("hidden", "");
@@ -337,6 +346,15 @@
       if (emailInput && !emailUsable(emailInput.value)) {
         fail("That email address does not look right. Check it for a typo.");
         emailInput.focus();
+        return;
+      }
+
+      // Spam trap. Only a bot fills the hidden "website" box. Thank it and
+      // send nothing, so a trapped post never reaches the worker and is never
+      // counted as a lead in Google Ads.
+      var trap = form.querySelector('input[name="website"]');
+      if (trap && trap.value) {
+        showDone();
         return;
       }
 
@@ -355,11 +373,14 @@
 
       var payload = {};
       Array.prototype.forEach.call(form.elements, function (el) {
-        if (!el.name || el.disabled) return;
+        if (!el.name || el.disabled || el.name === "website") return;
         if (el.type === "radio" && !el.checked) return;
         payload[el.name] = el.value;
       });
       if (payload.email) payload.email = payload.email.trim().toLowerCase();
+      // The worker drops any post whose company is filled. This form has no
+      // company field, so it always sends an empty one.
+      payload.company = "";
 
       // Where the visitor came from, spread in LAST so a form field can never
       // shadow it. The worker reads source, channel, page and attribution
@@ -378,18 +399,18 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       })
-        .then(function (res) { return res.ok ? res : Promise.reject(new Error("http " + res.status)); })
-        .then(function () {
-          // Counted only here, after the worker answered 2xx.
-          if (window.RSUTrack && typeof window.RSUTrack.lead === "function") {
+        .then(function (res) {
+          if (!res.ok) return Promise.reject(new Error("http " + res.status));
+          // A body that is not JSON still means the worker took the lead.
+          return res.json().then(function (body) { return body || {}; }, function () { return {}; });
+        })
+        .then(function (body) {
+          // Counted only here, after the worker answered 2xx, and not when it
+          // answered `skipped`: that is a post it dropped on purpose.
+          if (!body.skipped && window.RSUTrack && typeof window.RSUTrack.lead === "function") {
             try { window.RSUTrack.lead(); } catch (e) { /* never block the done panel */ }
           }
-          form.setAttribute("hidden", "");
-          if (donePanel) {
-            donePanel.removeAttribute("hidden");
-            donePanel.setAttribute("tabindex", "-1");
-            donePanel.focus();
-          }
+          showDone();
         })
         .catch(function () {
           sending = false;
