@@ -349,14 +349,14 @@
         return;
       }
 
-      // Spam trap. Only a bot fills the hidden "website" box. Thank it and
-      // send nothing, so a trapped post never reaches the worker and is never
-      // counted as a lead in Google Ads.
+      // Spam trap. A submission is NEVER dropped (Eric, 2026-10-03): no thanks
+      // and return, and no minimum-fill-time guard, because browser autofill
+      // can fill and submit a form in under a second. Whatever the hidden
+      // "website" box holds rides to the worker as `company`, the field its
+      // honeypot check reads, and the worker delivers the lead labeled
+      // "[Possible spam]". A trapped submit is never counted as a lead below.
       var trap = form.querySelector('input[name="website"]');
-      if (trap && trap.value) {
-        showDone();
-        return;
-      }
+      var trapped = trap ? String(trap.value || "").trim() : "";
 
       // No endpoint configured means the form is not wired. Say so rather
       // than silently pretending it sent, which is what it did before.
@@ -373,14 +373,15 @@
 
       var payload = {};
       Array.prototype.forEach.call(form.elements, function (el) {
-        if (!el.name || el.disabled || el.name === "website") return;
+        if (!el.name || el.disabled) return;
         if (el.type === "radio" && !el.checked) return;
         payload[el.name] = el.value;
       });
       if (payload.email) payload.email = payload.email.trim().toLowerCase();
-      // The worker drops any post whose company is filled. This form has no
-      // company field, so it always sends an empty one.
-      payload.company = "";
+      // The trap's trimmed value is the worker's `company`; the website field
+      // itself is never sent. An empty trap sends company: "".
+      delete payload.website;
+      payload.company = trapped;
 
       // Where the visitor came from, spread in LAST so a form field can never
       // shadow it. The worker reads source, channel, page and attribution
@@ -405,10 +406,15 @@
           return res.json().then(function (body) { return body || {}; }, function () { return {}; });
         })
         .then(function (body) {
-          // Counted only here, after the worker answered 2xx, and not when it
-          // answered `skipped`: that is a post it dropped on purpose.
-          if (!body.skipped && window.RSUTrack && typeof window.RSUTrack.lead === "function") {
-            try { window.RSUTrack.lead(); } catch (e) { /* never block the done panel */ }
+          // Counted only here, after the worker answered 2xx. A trapped submit
+          // is counted apart as form_possible_spam (never a lead, never an Ads
+          // conversion); an untrapped one is a lead unless the worker answered
+          // `skipped`, a post it dropped on purpose.
+          if (window.RSUTrack) {
+            try {
+              if (trapped) { if (typeof window.RSUTrack.spam === "function") window.RSUTrack.spam(); }
+              else if (!body.skipped && typeof window.RSUTrack.lead === "function") window.RSUTrack.lead();
+            } catch (e) { /* never block the done panel */ }
           }
           showDone();
         })

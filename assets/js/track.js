@@ -14,9 +14,10 @@
         into the CRM note). Ported from the Hometown Social build.
 
      2. THE LEAD EVENT. ui.js calls RSUTrack.lead() only after the worker
-        answers 2xx. That sends GA4 `generate_lead` and the Google Ads
-        "Estimate form sent" conversion. A button press that fails to send
-        counts as nothing.
+        answers 2xx and only when the hidden trap was empty. That sends GA4
+        `generate_lead` and the Google Ads "Estimate form sent" conversion. A
+        trapped submit calls RSUTrack.spam() instead: GA4 `form_possible_spam`,
+        no conversion. A button press that fails to send counts as nothing.
 
      3. THE PHONE TAP. Any tap on a tel: link sends GA4 `phone_tap` and the
         Google Ads "Phone tap on website" conversion. It never blocks the
@@ -152,6 +153,13 @@
     lead: function () {
       send("generate_lead", { form_name: "estimate", lead_source: source(), lead_channel: channel() });
       if (targets().lead) send("conversion", { send_to: targets().lead });
+    },
+
+    // A submit whose hidden trap was filled. The worker still delivers it
+    // (labeled "[Possible spam]"), so it is counted apart: never generate_lead
+    // and never an Ads conversion.
+    spam: function () {
+      send("form_possible_spam", { form_name: "estimate", lead_source: source(), lead_channel: channel() });
     },
 
     tap: function () {
