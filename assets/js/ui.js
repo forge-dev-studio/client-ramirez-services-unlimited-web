@@ -406,13 +406,15 @@
           return res.json().then(function (body) { return body || {}; }, function () { return {}; });
         })
         .then(function (body) {
-          // Counted only here, after the worker answered 2xx. A trapped submit
-          // is counted apart as form_possible_spam (never a lead, never an Ads
-          // conversion); an untrapped one is a lead unless the worker answered
-          // `skipped`, a post it dropped on purpose.
+          // Counted only here, after the worker answered 2xx. A trapped submit,
+          // or a sender on the worker's spam block list (possibleSpam: true,
+          // spam reports 2026-11-07), is counted apart as form_possible_spam
+          // (never a lead, never an Ads conversion); anything else is a lead
+          // unless the worker answered `skipped`, a post it dropped on purpose.
+          var listed = body.possibleSpam === true;
           if (window.RSUTrack) {
             try {
-              if (trapped) { if (typeof window.RSUTrack.spam === "function") window.RSUTrack.spam(); }
+              if (trapped || listed) { if (typeof window.RSUTrack.spam === "function") window.RSUTrack.spam(trapped ? "honeypot" : "block_list"); }
               else if (!body.skipped && typeof window.RSUTrack.lead === "function") window.RSUTrack.lead();
             } catch (e) { /* never block the done panel */ }
           }

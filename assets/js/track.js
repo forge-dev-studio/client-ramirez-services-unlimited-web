@@ -155,11 +155,12 @@
       if (targets().lead) send("conversion", { send_to: targets().lead });
     },
 
-    // A submit whose hidden trap was filled. The worker still delivers it
-    // (labeled "[Possible spam]"), so it is counted apart: never generate_lead
-    // and never an Ads conversion.
-    spam: function () {
-      send("form_possible_spam", { form_name: "estimate", lead_source: source(), lead_channel: channel() });
+    // A submit whose hidden trap was filled (reason "honeypot"), or whose sender
+    // is on the worker's spam block list ("block_list"). The worker still
+    // delivers it labeled, or holds it, so it is counted apart: never
+    // generate_lead and never an Ads conversion.
+    spam: function (reason) {
+      send("form_possible_spam", { form_name: "estimate", lead_source: source(), lead_channel: channel(), reason: reason || "honeypot" });
     },
 
     tap: function () {
